@@ -12,48 +12,53 @@ public class Partie {
 	}
 	
 	// Init;
-	void initialiserJoueurs(int nbJoueur) 
+	public void initialiserJoueurs(int nbJoueur) 
 	{
 		
 	}
-	void initialiserPlateau() 
+	public void initialiserPlateau() 
 	{
 		
 	}
 	
 	
-	int lancerDe() {
+	public int lancerDe() {
 		return 0;
 	}
 	
 	// Game
-	void jouerUnTour()
+	public void jouerUnTour()
 	{
+		int numeroTour=0;
 		while(!estPartieTermine()) 
 		{
+			this.de = lancerDe();
+			
+			//choisirPion()
+			//Avancer ou pas ajouterCheval sur case toussa... 
 			
 		}
 	}
 	
 	// Getter Setter
-	boolean estPartieTermine() {
+	public boolean estPartieTermine() {
 		return true;
 	}
-	Joueur getJoueurCourant() {
+	public Joueur getJoueurCourant() {
 		return null;
 	}
-	void setJoueurcourant(Joueur j) {
+	public void setJoueurcourant(Joueur j) {
 		
 	}
-	Plateau getPlateau() {
+	public Plateau getPlateau() {
 		return null;
 	}
-	ArrayList<Joueur> getJoueurs() {
+	public ArrayList<Joueur> getJoueurs() {
 		return null;
 	}
 	
 	
-	void mangerLesPions(Case c) {
+	public void mangerLesPions(Case c) {
 		
 	}
 	
