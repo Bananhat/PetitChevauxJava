@@ -5,14 +5,35 @@ public class Joueur {
 	private ArrayList<Pion> listeChevaux;
 	private Case CaseDeDepart;
 	private Couleur couleur;
-	public Joueur(String nom, Couleur c) {
+	public Joueur(String nom, Couleur c) 
+	{
 		this.nom = nom;
 		this.couleur = c;
+		listeChevaux = new ArrayList<Pion>(){ { add(new Pion("1", couleur)); add(new Pion("2", couleur)); add(new Pion("3", couleur)); add(new Pion("4", couleur)); } };
 	}
 	public Case getCaseDeDepart() {
 		return CaseDeDepart;
 		
 	}
+	public boolean aucunChevauxSorti(Plateau plateau)
+	{
+		int ct=0;
+		for(Case c : plateau.getEcuries())
+		{
+			for(Pion p : c.getChevaux())
+			{
+				for(Pion p1 : listeChevaux)
+				{
+					if(p1 == p) 
+					{
+						ct++;
+					}
+				}
+			}
+		}
+		return ct == 4;
+	}
+	
 	public void setCaseDeDepart(Case c) {
 		this.CaseDeDepart = c;
 	}
