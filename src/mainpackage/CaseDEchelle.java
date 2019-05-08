@@ -1,5 +1,6 @@
 package mainpackage;
 
-public class CaseDEchelle {
+public class CaseDEchelle extends CaseColoree
+{
 
 }

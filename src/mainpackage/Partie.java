@@ -1,6 +1,7 @@
 package mainpackage;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Partie {
 	private int de;
@@ -22,7 +23,7 @@ public class Partie {
 	}
 	
 	
-	public int lancerDe() {
+	private int lancerDe() {
 		return 0;
 	}
 	
@@ -30,10 +31,46 @@ public class Partie {
 	public void jouerUnTour()
 	{
 		int numeroTour=0;
+		Scanner sc = new Scanner(System.in);
+		int reponse;
+		String reponseSortir;
 		while(!estPartieTermine()) 
 		{
 			this.de = lancerDe();
-			
+			if(this.jCourant.getChevaux().isEmpty()) // si le jCourant n'a aucun cheval sur le plateau 
+			{
+				if(de == 6) 
+				{
+					System.out.println("Quel cheval voulez vous sortir ? :");
+					reponse = sc.nextInt();
+					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse));
+				}
+				else 
+				{
+					System.out.println("Vous passez votre tour...");
+				}
+				
+			}
+			else 
+			{
+				if(de == 6) 
+				{
+					System.out.println("Voulez vous sortir un pion ? o/n : ");
+					reponseSortir = sc.nextLine();
+					if(reponseSortir.equals("o"))
+					{
+						System.out.println("Quel cheval voulez vous sortir ? :");
+						reponse = sc.nextInt();
+						jCourant.getCaseDeDepart().ajouteCheval(jCourant.choisirPion(reponse, plateau));
+					}
+					else 
+					{
+						System.out.println("Quel cheval voulez vous deplacer ? :");
+						reponse = sc.nextInt();
+						plateau.deplacerPionA(jCourant.getChevaux().get(reponse), jCourant.getChevaux().get(reponse).getPos()+de);
+					}
+				}
+			}
 			//choisirPion()
 			//Avancer ou pas ajouterCheval sur case toussa... 
 			
@@ -41,24 +78,26 @@ public class Partie {
 	}
 	
 	// Getter Setter
-	public boolean estPartieTermine() {
+	public boolean estPartieTermine() 
+	{
 		return true;
 	}
 	public Joueur getJoueurCourant() {
-		return null;
+		return this.jCourant;
 	}
 	public void setJoueurcourant(Joueur j) {
-		
+		this.jCourant = j;
 	}
 	public Plateau getPlateau() {
-		return null;
+		return this.plateau;
 	}
 	public ArrayList<Joueur> getJoueurs() {
-		return null;
+		return this.listeJoueur;
 	}
 	
 	
-	public void mangerLesPions(Case c) {
+	private void mangerLesPions(Case c) 
+	{
 		
 	}
 	

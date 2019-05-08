@@ -1,5 +1,5 @@
 package mainpackage;
 
-public class CaseDeChemin {
+public class CaseDeChemin extends Case{
 
 }

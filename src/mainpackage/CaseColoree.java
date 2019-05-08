@@ -1,5 +1,5 @@
 package mainpackage;
 
-public class CaseColoree {
+public abstract class CaseColoree extends Case {
 
 }
