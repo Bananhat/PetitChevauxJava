@@ -15,4 +15,9 @@ public class CaseDEchelle extends CaseColoree
 		return false;
 	}
 
+	@Override
+	public void ajouteCheval(Pion p) {
+		listeChevaux.add(p);
+	}
+
 }

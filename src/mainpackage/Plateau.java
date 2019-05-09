@@ -7,32 +7,12 @@ public class Plateau {
 	private ArrayList<ArrayList<CaseDEchelle>> echelles;
 	private ArrayList<CaseEcurie> caseEcurie;
 	
-
-	public void deplacerPionA(Pion p, int num) 
-	{
-		boolean peutDeplacer = true;
-		
-		for(int i=0; i<num;i++) 
-		{
-			if ( caseDeChemin.get(p.getPos()+1).peutPasser(p) ) 
-			{
-				p.augmentePos(1);
-			}
-			else 
-			{
-				peutDeplacer = false;
-			}
-	
-		}
-		if (peutDeplacer) 
-		{
-			caseDeChemin.get(p.getPos()).ajouteCheval(p);;
-		}
-		else
-		{
-			System.out.println("Impossible de se deplacer");
-		}
+	public Plateau() {
+		caseDeChemin = new ArrayList<CaseDeChemin>();
+		echelles = new ArrayList<ArrayList<CaseDEchelle>>();
+		caseEcurie = new ArrayList<CaseEcurie>();
 	}
+
 
 	public ArrayList<CaseEcurie> getEcuries() 
 	{
@@ -45,6 +25,21 @@ public class Plateau {
 	public ArrayList<ArrayList<CaseDEchelle>> getEchelle()
 	{
 		return echelles; 
+	}
+
+
+	public void retirer(Joueur jCourant, Pion pion) {
+		for(Case c : caseEcurie) 
+		{
+			for(Pion p : c.getChevaux()) {
+				for(Pion p1 : jCourant.getChevaux()) {
+					if (p1.equals(p)) {
+						caseEcurie.remove(p);
+					}
+				}
+			}
+		}
+		
 	}
 
 }

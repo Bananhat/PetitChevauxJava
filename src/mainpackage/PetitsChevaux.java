@@ -10,6 +10,7 @@ public class PetitsChevaux {
 		{
 			game.jouerUnTour();
 		}
+		game.getScan().close();
 	}
 
 }

@@ -1,40 +1,34 @@
 package mainpackage;
 import java.util.ArrayList;
 public class Joueur {
+	
 	private String nom;
 	private ArrayList<Pion> listeChevaux;
-	private Case CaseDeDepart;
+	private CaseDeChemin CaseDeDepart;
+	private boolean sorti;
 	private Couleur couleur;
+	
 	public Joueur(String nom, Couleur c) 
 	{
 		this.nom = nom;
 		this.couleur = c;
 		listeChevaux = new ArrayList<Pion>(){ { add(new Pion("1", couleur)); add(new Pion("2", couleur)); add(new Pion("3", couleur)); add(new Pion("4", couleur)); } };
 	}
-	public Case getCaseDeDepart() {
+	public CaseDeChemin getCaseDeDepart() 
+	{
+		sorti = true;
 		return CaseDeDepart;
 		
 	}
-	public boolean aucunChevauxSorti(Plateau plateau)
+	public boolean getSorti()
 	{
-		int ct=0;
-		for(Case c : plateau.getEcuries())
-		{
-			for(Pion p : c.getChevaux())
-			{
-				for(Pion p1 : listeChevaux)
-				{
-					if(p1 == p) 
-					{
-						ct++;
-					}
-				}
-			}
-		}
-		return ct == 4;
+		return sorti;
+	}
+	public void setSorti(boolean s) {
+		sorti = s;
 	}
 	
-	public void setCaseDeDepart(Case c) {
+	public void setCaseDeDepart(CaseDeChemin c) {
 		this.CaseDeDepart = c;
 	}
 	public ArrayList<Pion> getChevaux()
