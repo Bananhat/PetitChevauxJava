@@ -24,6 +24,9 @@ public class CaseEcurie extends Case{
 	public void ajouteCheval(Pion p) {
 		listeChevaux.add(p);
 	}
+	public ArrayList<Pion> getChevaux(){
+		return listeChevaux;
+	}
 
 
 }

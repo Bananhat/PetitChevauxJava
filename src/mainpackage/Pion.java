@@ -25,7 +25,7 @@ public class Pion {
 	public void deplacerPionA(int num, Plateau p) 
 	{
 		boolean peutDeplacer = true;
-		
+		int old_pos = this.pos;
 		for(int i=0; i<num;i++) 
 		{
 			if ( p.getChemin().get(this.getPos()+1).peutPasser(this) ) 
@@ -40,10 +40,12 @@ public class Pion {
 		}
 		if (peutDeplacer) 
 		{
-			p.getChemin().get(this.getPos()).ajouteCheval(this);;
+			p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
+			p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
 		}
 		else
 		{
+			this.pos = old_pos;
 			System.out.println("Impossible de se deplacer");
 		}
 	}

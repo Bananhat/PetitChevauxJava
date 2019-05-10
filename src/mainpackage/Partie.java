@@ -82,6 +82,27 @@ public class Partie {
 	public void jouerUnTour()
 	{
 
+		//TEST SORTI ECURIE
+		int i=0;
+		for(Case c : plateau.getEcuries()) {
+			for(Pion p : c.getChevaux()) {
+				i++;
+			}
+		}
+		System.out.println("Il y a "+i+" chevaux dans l'écurie..");
+		// FIN TEST SORTI
+		//TEST CHEMIN et POSITION DES CHEVAUX
+		i=0;
+		for(Case c: plateau.getChemin()) {
+			for(Pion p : c.getChevaux()) {
+				i++;
+				System.out.println("La position du cheval est "+p.getPos());
+			}
+		}
+		System.out.println("Il y a "+i+" chevaux sur le chemin");
+		//FIN TEST CHEMIN
+		
+		//
 		int reponse;
 		String reponseSortir;
 		this.de = lancerDe();
@@ -95,8 +116,10 @@ public class Partie {
 				{
 					System.out.println("Quel cheval voulez vous sortir ? :");
 					reponse = sc.nextInt();
-					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse));
-					plateau.retirer(jCourant, jCourant.getChevaux().get(reponse));
+					
+					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse)); //On ajoute le cheval au chemin
+					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse)); //On retire de l'écurie
+					
 					numJ--;
 				}
 				else 
@@ -116,7 +139,10 @@ public class Partie {
 				{
 					System.out.println("Quel cheval voulez vous sortir ? :");
 					reponse = sc.nextInt();
+					
 					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse));
+					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse));
+					
 				}
 				else 
 				{
@@ -126,12 +152,19 @@ public class Partie {
 				}
 				numJ--;
 			}
+			else
+			{
+				System.out.println("Quel cheval voulez vous deplacer ? :");
+				reponse = sc.nextInt();
+				jCourant.getChevaux().get(reponse).deplacerPionA(de, plateau);
+			}
 		}
 		if(numJ==3) 
 		{
 			numJ=0;
 		}
-		else {
+		else 
+		{
 		numJ++;
 		}
 		
@@ -141,7 +174,18 @@ public class Partie {
 	// Getter Setter
 	public boolean estPartieTermine() 
 	{
-		return true;
+		int i=0;
+		for(ArrayList<CaseDEchelle> ar : plateau.getEchelle()) {
+			for(Case c : ar)
+			{
+				if(!c.listeChevaux.isEmpty())
+				{
+					i++;
+					return i==4; 
+				}
+			}
+		}
+		return false;
 	}
 	public Joueur getJoueurCourant() {
 		return this.jCourant;

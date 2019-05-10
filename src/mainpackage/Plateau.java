@@ -28,18 +28,15 @@ public class Plateau {
 	}
 
 
-	public void retirer(Joueur jCourant, Pion pion) {
+	public void retirerEcurie(Joueur jCourant, Pion pion)
+	{
 		for(Case c : caseEcurie) 
 		{
-			for(Pion p : c.getChevaux()) {
-				for(Pion p1 : jCourant.getChevaux()) {
-					if (p1.equals(p)) {
-						caseEcurie.remove(p);
-					}
-				}
+			if(c.listeChevaux.contains(pion)) 
+			{
+				c.listeChevaux.remove(pion);
 			}
 		}
-		
 	}
 
 }

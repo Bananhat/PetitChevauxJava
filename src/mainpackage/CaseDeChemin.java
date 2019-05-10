@@ -10,6 +10,16 @@ public class CaseDeChemin extends Case{
 	}
 	public boolean peutPasser(Pion p) {
 		// TODO Auto-generated method stub
+		if(listeChevaux.isEmpty()) {
+			return true;
+		}
+		else {
+			for(Pion p1 : listeChevaux) {
+				if(p1.getCouleur() == p.getCouleur()) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -21,6 +31,10 @@ public class CaseDeChemin extends Case{
 	@Override
 	public void ajouteCheval(Pion p) {
 		listeChevaux.add(p);
+	}
+	public void retireCheval(Pion p) {
+		listeChevaux.remove(p);
+		
 	}
 
 }
