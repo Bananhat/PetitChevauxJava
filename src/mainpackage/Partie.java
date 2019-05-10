@@ -12,7 +12,7 @@ public class Partie {
 	private Scanner sc = new Scanner(System.in);
 	public Partie() 
 	{
-		numJ = 0;
+		numJ = (int) (Math.random() * (4)+1);
 		listeJoueur = new ArrayList<Joueur>();
 		plateau = new Plateau();
 		initialiserPlateau();
@@ -41,16 +41,18 @@ public class Partie {
         }
       
 	}
-	public void initEcurie() {
+	public void initEcurie() 
+	{
 		
-		for(int i=0; i<4;i++) //Init de l'écurie et on ajoute les chevaux a l'écurie par défaut
-		{
-			for(int j=0; j<4;j++)
+
+			for(Joueur j : listeJoueur)
 			{
-				plateau.getEcuries().add(new CaseEcurie());		
-				plateau.getEcuries().get( (i*4) + j ).ajouteCheval(listeJoueur.get(i).getChevaux().get(j)); 
+				for(Pion p : j.getChevaux())
+				{
+					plateau.getEcuries().add(p.getCaseEc());
+					p.getCaseEc().ajouteCheval(p);
+				}
 			}
-		}
 	}
 	public void initialiserPlateau() 
 	{
@@ -108,7 +110,7 @@ public class Partie {
 		this.de = lancerDe();
 		System.out.println("A Joueur "+(numJ+1)+" de jouer");
 		System.out.println("La valeur du dé est : "+de);
-		jCourant = listeJoueur.get((int) (Math.random() * (0)));
+		jCourant = listeJoueur.get(numJ);
 		
 		if(!jCourant.getSorti()) // si le jCourant n'a aucun cheval sur le plateau 
 		{
@@ -117,8 +119,8 @@ public class Partie {
 					System.out.println("Quel cheval voulez vous sortir ? :");
 					reponse = sc.nextInt();
 					
-					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse)); //On ajoute le cheval au chemin
-					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse)); //On retire de l'écurie
+					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1)); //On ajoute le cheval au chemin
+					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'écurie
 					
 					numJ--;
 				}
@@ -140,23 +142,24 @@ public class Partie {
 					System.out.println("Quel cheval voulez vous sortir ? :");
 					reponse = sc.nextInt();
 					
-					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse));
-					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse));
+					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1));
+					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1));
 					
 				}
 				else 
 				{
 					System.out.println("Quel cheval voulez vous deplacer ? :");
 					reponse = sc.nextInt();
-					jCourant.getChevaux().get(reponse).deplacerPionA(de, plateau);
+					jCourant.getChevaux().get(reponse-1).deplacerPionA(de, plateau);
 				}
 				numJ--;
 			}
 			else
 			{
+				do {
 				System.out.println("Quel cheval voulez vous deplacer ? :");
 				reponse = sc.nextInt();
-				jCourant.getChevaux().get(reponse).deplacerPionA(de, plateau);
+				} while(!jCourant.getChevaux().get(reponse-1).deplacerPionA(de, plateau));
 			}
 		}
 		if(numJ==3) 
@@ -181,7 +184,9 @@ public class Partie {
 				if(!c.listeChevaux.isEmpty())
 				{
 					i++;
+					System.out.println(i);
 					return i==4; 
+					
 				}
 			}
 		}
@@ -198,6 +203,9 @@ public class Partie {
 	}
 	public ArrayList<Joueur> getJoueurs() {
 		return this.listeJoueur;
+	}
+	public void augmenteNum() {
+		this.numJ++;
 	}
 	
 	

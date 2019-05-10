@@ -8,6 +8,9 @@ public class CaseDeChemin extends Case{
 		super();
 		listeChevaux = new ArrayList<Pion>();
 	}
+	public ArrayList<Pion> getChevaux() {
+		return listeChevaux;
+	}
 	public boolean peutPasser(Pion p) {
 		// TODO Auto-generated method stub
 		if(listeChevaux.isEmpty()) {

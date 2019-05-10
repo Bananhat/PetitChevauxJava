@@ -1,8 +1,13 @@
 package mainpackage;
 
+import java.util.ArrayList;
+
 public class CaseDEchelle extends CaseColoree
 {
 
+	public CaseDEchelle() {
+		this.listeChevaux= new ArrayList<Pion>();
+	}
 	@Override
 	public boolean peutPasser(Pion p) {
 		// TODO Auto-generated method stub
