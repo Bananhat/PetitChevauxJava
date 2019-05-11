@@ -17,9 +17,13 @@ public class PetitsChevaux {
 			if(j == old_j) 
 			{
 				ct++;
-				if(ct ==2) {
+				if(ct ==1 && game.getNum() != 3) {
 				game.augmenteNum();
 				ct=0;
+				}
+				else {
+					game.setNum(0);
+					ct=0;
 				}
 			}
 			

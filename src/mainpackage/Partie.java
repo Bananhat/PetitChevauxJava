@@ -35,6 +35,9 @@ public class Partie {
                 //nom = sc.nextLine();
                 listeJoueur.add(new Joueur(nom, Couleur.values()[i]));
                 listeJoueur.get(i).setCaseDeDepart(plateau.getChemin().get(i*14));
+                for(int j=0; j<4;j++) {
+                listeJoueur.get(i).getChevaux().get(j).setPos(i*14);
+                }
                 System.out.println(Couleur.values()[i]);
                
             }
@@ -95,12 +98,17 @@ public class Partie {
 		// FIN TEST SORTI
 		//TEST CHEMIN et POSITION DES CHEVAUX
 		i=0;
+		int j=0;
 		for(Case c: plateau.getChemin()) {
+			
 			for(Pion p : c.getChevaux()) {
 				i++;
 				System.out.println("La position du cheval est "+p.getPos());
+				System.out.println(j);
 			}
+			j++;
 		}
+		
 		System.out.println("Il y a "+i+" chevaux sur le chemin");
 		//FIN TEST CHEMIN
 		
@@ -108,6 +116,7 @@ public class Partie {
 		int reponse;
 		String reponseSortir;
 		this.de = lancerDe();
+		de = 6;
 		System.out.println("A Joueur "+(numJ+1)+" de jouer");
 		System.out.println("La valeur du dé est : "+de);
 		jCourant = listeJoueur.get(numJ);
@@ -207,11 +216,12 @@ public class Partie {
 	public void augmenteNum() {
 		this.numJ++;
 	}
-	
-	
-	private void mangerLesPions(Case c) 
+	public void setNum(int i) {
+		this.numJ = i;
+	}
+	public int getNum()
 	{
-		
+		return this.numJ;
 	}
 	
 }

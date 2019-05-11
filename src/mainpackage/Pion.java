@@ -36,6 +36,7 @@ public class Pion {
 		
 		for(Case c : p.getChemin()) { //vérifie que le pion est bien en piste
 			if(c.getChevaux().contains(this)) {
+			
 				estEnPiste = true;
 			}
 		}
@@ -45,6 +46,7 @@ public class Pion {
 			{
 				if ( p.getChemin().get(this.getPos()+1).peutPasser(this) ) 
 				{
+					
 					this.augmentePos(1);
 				}
 				else 
@@ -61,9 +63,15 @@ public class Pion {
 			if(doitManger) 
 			{
 				for(Pion pion : p.getChemin().get(indice).getChevaux()) {
+					if(pion.couleur != this.couleur) {
 					retourneEcurie(p);
 					p.getChemin().get(this.getPos()+1).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
 					p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
+					}
+					else {
+						this.pos = old_pos;
+						System.out.println("Impossible de se deplacer");
+					}
 				}
 				
 			}
@@ -97,5 +105,9 @@ public class Pion {
 	public CaseEcurie getCaseEc() {
 		// TODO Auto-generated method stub
 		return caseEc;
+	}
+	public void setPos(int i) {
+		// TODO Auto-generated method stub
+		this.pos = i;
 	}
 }
