@@ -2,11 +2,13 @@ package mainpackage;
 
 import java.util.ArrayList;
 
-public class CaseDEchelle extends CaseColoree
+public class CaseDEchelle extends Case
 {
 
-	public CaseDEchelle() {
+	private int num;
+	public CaseDEchelle(int num) {
 		this.listeChevaux= new ArrayList<Pion>();
+		this.num = num;
 	}
 	@Override
 	public boolean peutPasser(Pion p) {
@@ -24,5 +26,11 @@ public class CaseDEchelle extends CaseColoree
 	public void ajouteCheval(Pion p) {
 		listeChevaux.add(p);
 	}
-
+	public int getNum()
+	{
+		return this.num;
+	}
+	public void retireCheval(Pion p) {
+		listeChevaux.remove(p);
+	}
 }

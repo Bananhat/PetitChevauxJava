@@ -23,4 +23,6 @@ public abstract class Case
 	public abstract boolean peutPasser(Pion p);
 	public abstract boolean peutSArreter(Pion p);
 
+	public abstract void retireCheval(Pion pion);
+
 }

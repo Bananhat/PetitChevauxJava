@@ -38,5 +38,11 @@ public class CaseEcurie extends Case{
 		return listeChevaux;
 	}
 
+	@Override
+	public void retireCheval(Pion pion) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

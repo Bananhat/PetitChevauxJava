@@ -6,16 +6,26 @@ public class Pion {
 	private Couleur couleur;
 	private String id;
 	private int pos;
+	private int posCaseNumerote;
 	private CaseEcurie caseEc;
+	private boolean FiniTour;
 	public Pion(String id, Couleur c) 
 	{
 		this.id = id;
 		caseEc = new CaseEcurie();
 		this.couleur = c;
+		FiniTour=false;
+	}
+	public int getPosCaseNumerote() {
+		return posCaseNumerote;
 	}
 	public Couleur getCouleur() 
 	{
 		return this.couleur;
+	}
+	public boolean aFiniTour()
+	{
+		return FiniTour;
 	}
 	public int getPos() 
 	{
@@ -26,7 +36,57 @@ public class Pion {
 	{
 		this.pos+=num;
 	}
-	public boolean deplacerPionA(int num, Plateau p) 
+	public boolean deplacementFinal(int num, Plateau p) //retourne false quand le pion ne peut se déplacer
+	{
+		posCaseNumerote++;
+		Case oldCase;
+		Case caseARemplir = p.getEchelle().get(this.couleur.getNum()).get(posCaseNumerote);
+		if(posCaseNumerote == 0) 
+		{
+			 oldCase = (CaseDeChemin) p.getChemin().get(this.getPos());
+		}
+		else {
+			oldCase = (CaseDEchelle) p.getEchelle().get(this.couleur.getNum()).get(posCaseNumerote-1);
+		}
+		if(caseARemplir.listeChevaux.isEmpty()) //on vérifie que la case est libre
+		{ 
+			caseARemplir.ajouteCheval(this);
+			oldCase.retireCheval(this);
+			return true;
+		}
+		else {
+			posCaseNumerote--;
+			return false;
+		}
+	}
+	public boolean deplacementFinalTest(int num, Plateau p) 
+	{
+		if(posCaseNumerote+1 == 6) //on vérifie que le joueur ne dépasse pas 6
+		{
+			return false;
+		}
+		else {
+			
+		
+		if(posCaseNumerote == -1 && num==1) { //on commence l'entrée à 0
+			return this.deplacementFinal(num, p);
+		}
+		else {
+			if(posCaseNumerote+2 == num) //si le num vaut la case sur laquelle il veut aller c'est bon
+			{
+				return this.deplacementFinal(num, p);
+			}
+		}
+		}
+		return false;
+	
+	}
+	public void deplacement(Plateau p, int num)
+	{
+		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
+		p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
+	}
+	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) 
 	{
 		boolean peutDeplacer = true;
 		int old_pos = this.pos;
@@ -46,8 +106,17 @@ public class Pion {
 			{
 				if ( p.getChemin().get(this.getPos()+1).peutPasser(this) ) 
 				{
+					//vérification fin tour
+					if(p.getChemin().get(this.getPos()+1) == jCourant.getCaseDeDepart())
+					{
+						this.FiniTour = true;
+						posCaseNumerote=-1;
+						peutDeplacer = false;
+					} else
+					{
+						this.augmentePos(1);
+					}
 					
-					this.augmentePos(1);
 				}
 				else 
 				{
@@ -63,12 +132,14 @@ public class Pion {
 			if(doitManger) 
 			{
 				for(Pion pion : p.getChemin().get(indice).getChevaux()) {
-					if(pion.couleur != this.couleur) {
-					retourneEcurie(p);
-					p.getChemin().get(this.getPos()+1).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
-					p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
+					if(pion.couleur != this.couleur) 
+					{
+						retourneEcurie(p);
+						this.pos++;
+						deplacement(p, num);
 					}
-					else {
+					else 
+					{
 						this.pos = old_pos;
 						System.out.println("Impossible de se deplacer");
 					}
@@ -77,23 +148,28 @@ public class Pion {
 			}
 			else if (peutDeplacer) 
 			{
-				p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
-				p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
+				deplacement(p, num);
+			}
+			else if(this.FiniTour)
+			{
+				System.out.println("c'est la fin du tour");
 			}
 			else
 			{
 				this.pos = old_pos;
 				System.out.println("Impossible de se deplacer");
+				return false;
 			}
 			return true;
 	}
-	else 
+	else //faire une exception plutôt
 	{
 		System.out.println("Veuillez selectionner un cheval en piste...");
 		return false;
 	}
 }
-	public void retourneEcurie(Plateau p) {
+	public void retourneEcurie(Plateau p) 
+	{
 		p.getChemin().remove(this);
 		for(Case e : p.getEcuries()) 
 		{

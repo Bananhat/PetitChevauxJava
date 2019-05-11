@@ -12,7 +12,7 @@ public class Partie {
 	private Scanner sc = new Scanner(System.in);
 	public Partie() 
 	{
-		numJ = (int) (Math.random() * (4)+1);
+		numJ = (int) (Math.random() * (4));
 		listeJoueur = new ArrayList<Joueur>();
 		plateau = new Plateau();
 		initialiserPlateau();
@@ -85,7 +85,7 @@ public class Partie {
 			plateau.getEchelle().add(new ArrayList<CaseDEchelle>());
 			for(int j=0; j<6;j++)
 			{
-				plateau.getEchelle().get(i).add(new CaseDEchelle());
+				plateau.getEchelle().get(i).add(new CaseDEchelle(j+1));
 			}
 	
 		}
@@ -97,7 +97,40 @@ public class Partie {
 	private int lancerDe() {
 		return (int) (Math.random() * (6)+1);
 	}
+	public void SortirCheval(int reponse)
+	{
+		jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1)); //On ajoute le cheval au chemin
+		plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'�curie
+	}
 	
+	public boolean appDeplacement(int reponse) 
+	{
+		Pion cheval = jCourant.getChevaux().get(reponse-1);
+		if(!cheval.aFiniTour())
+		{
+			return cheval.deplacerPionA(de, plateau, jCourant);
+		}
+		else 
+		{
+			return cheval.deplacementFinal(de, plateau);
+		}
+		
+	}
+	public void proposerChoixDeplacement()
+	{
+		int reponse;
+		System.out.println("Quel cheval voulez vous deplacer ? :");
+		reponse = sc.nextInt();
+		appDeplacement(reponse);
+	}
+	
+	public void proposerChoixSorti()
+	{
+		System.out.println("Quel cheval voulez vous sortir ? :");
+		int reponse = sc.nextInt();
+		
+		SortirCheval(reponse);
+	}
 	// Game
 	public void jouerUnTour()
 	{
@@ -140,12 +173,7 @@ public class Partie {
 		{
 				if(de == 6) 
 				{
-					System.out.println("Quel cheval voulez vous sortir ? :");
-					reponse = sc.nextInt();
-					
-					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1)); //On ajoute le cheval au chemin
-					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'�curie
-					
+					proposerChoixSorti();
 					numJ--;
 				}
 				else 
@@ -163,27 +191,18 @@ public class Partie {
 				reponseSortir = sc.nextLine();
 				if(reponseSortir.equals("o"))
 				{
-					System.out.println("Quel cheval voulez vous sortir ? :");
-					reponse = sc.nextInt();
-					
-					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1));
-					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1));
+					proposerChoixSorti();
 					
 				}
 				else 
 				{
-					System.out.println("Quel cheval voulez vous deplacer ? :");
-					reponse = sc.nextInt();
-					jCourant.getChevaux().get(reponse-1).deplacerPionA(de, plateau);
+					proposerChoixDeplacement();
 				}
 				numJ--;
 			}
 			else
 			{
-				do {
-				System.out.println("Quel cheval voulez vous deplacer ? :");
-				reponse = sc.nextInt();
-				} while(!jCourant.getChevaux().get(reponse-1).deplacerPionA(de, plateau));
+				proposerChoixDeplacement();
 			}
 		}
 		if(numJ==3) 
@@ -207,10 +226,14 @@ public class Partie {
 			{
 				if(!c.listeChevaux.isEmpty())
 				{
-					i++;
-					System.out.println(i);
-					return i==4; 
-					
+					for(Pion pion : c.listeChevaux) {
+						i++;
+						System.out.println(i);
+						if(pion.getPosCaseNumerote()+1 == 1 || pion.getPosCaseNumerote()+1 == 2) {
+							return false;
+						}
+					}
+					return i==4;
 				}
 			}
 		}
