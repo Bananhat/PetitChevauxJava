@@ -18,8 +18,8 @@ public class Joueur {
 	{
 		sorti = true;
 		return CaseDeDepart;
-		
 	}
+
 	public boolean getSorti()
 	{
 		return sorti;

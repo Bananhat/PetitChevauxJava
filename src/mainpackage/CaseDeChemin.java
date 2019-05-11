@@ -2,12 +2,12 @@ package mainpackage;
 
 import java.util.ArrayList;
 
-public class CaseDeChemin extends Case{
-
+public class CaseDeChemin extends Case {
 	public CaseDeChemin() {
 		super();
 		listeChevaux = new ArrayList<Pion>();
 	}
+
 	public ArrayList<Pion> getChevaux() {
 		return listeChevaux;
 	}
@@ -37,7 +37,6 @@ public class CaseDeChemin extends Case{
 	}
 	public void retireCheval(Pion p) {
 		listeChevaux.remove(p);
-		
 	}
 
 }

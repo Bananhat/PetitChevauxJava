@@ -18,7 +18,7 @@ public class Partie {
 		initialiserPlateau();
 		initialiserJoueurs(4);
 		initEcurie();
-		
+		plateau.initTotalCases();
 	}
 	public Scanner getScan() {
 		return sc;
@@ -46,8 +46,8 @@ public class Partie {
 	}
 	public void initEcurie() 
 	{
-		
-
+		/*
+		ton ancien code
 			for(Joueur j : listeJoueur)
 			{
 				for(Pion p : j.getChevaux())
@@ -56,6 +56,21 @@ public class Partie {
 					p.getCaseEc().ajouteCheval(p);
 				}
 			}
+		*/
+
+		// TODO Il faut s'arranger pour placer les chevaux sur les bonnes cases dans la grande liste totalCases pour l'affichage.
+		// TODO Il faut √©galement modifier leur position de d√©part sur la bonne case dans totalCases.
+		for(int j = 0;j<4;j++) {
+			for(Pion p : listeJoueur.get(j).getChevaux())
+			{
+				plateau.getEcuries().add(p.getCaseEc());
+				p.getCaseEc().ajouteCheval(p);
+			}
+			for(int i = 0; i < 32; i++) {
+				plateau.getEcuries().add(new CaseEcurie());
+			}
+		}
+
 	}
 	public void initialiserPlateau() 
 	{
@@ -86,7 +101,7 @@ public class Partie {
 	// Game
 	public void jouerUnTour()
 	{
-
+		plateau.affichage();
 		//TEST SORTI ECURIE
 		int i=0;
 		for(Case c : plateau.getEcuries()) {
@@ -94,7 +109,7 @@ public class Partie {
 				i++;
 			}
 		}
-		System.out.println("Il y a "+i+" chevaux dans l'Ècurie..");
+		System.out.println("Il y a "+i+" chevaux dans l'ÔøΩcurie..");
 		// FIN TEST SORTI
 		//TEST CHEMIN et POSITION DES CHEVAUX
 		i=0;
@@ -118,7 +133,7 @@ public class Partie {
 		this.de = lancerDe();
 		de = 6;
 		System.out.println("A Joueur "+(numJ+1)+" de jouer");
-		System.out.println("La valeur du dÈ est : "+de);
+		System.out.println("La valeur du dÔøΩ est : "+de);
 		jCourant = listeJoueur.get(numJ);
 		
 		if(!jCourant.getSorti()) // si le jCourant n'a aucun cheval sur le plateau 
@@ -129,7 +144,7 @@ public class Partie {
 					reponse = sc.nextInt();
 					
 					jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1)); //On ajoute le cheval au chemin
-					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'Ècurie
+					plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'ÔøΩcurie
 					
 					numJ--;
 				}

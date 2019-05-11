@@ -3,11 +3,21 @@ package mainpackage;
 import java.util.ArrayList;
 
 public class CaseEcurie extends Case{
+	private boolean caseUtile = false;
 
 	public CaseEcurie() {
 		super();
 		listeChevaux = new ArrayList<Pion>();
 	}
+
+	public boolean getCaseUtile() {
+		return caseUtile;
+	}
+
+	public void setCaseUtile() {
+		this.caseUtile = true;
+	}
+
 	@Override
 	public boolean peutPasser(Pion p) {
 		// TODO Auto-generated method stub
