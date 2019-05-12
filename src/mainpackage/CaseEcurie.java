@@ -3,19 +3,19 @@ package mainpackage;
 import java.util.ArrayList;
 
 public class CaseEcurie extends Case{
-	private boolean caseUtile = false;
+	private String color = "null";
 
 	public CaseEcurie() {
 		super();
 		listeChevaux = new ArrayList<Pion>();
 	}
 
-	public boolean getCaseUtile() {
-		return caseUtile;
+	public String getColor() {
+		return color;
 	}
 
-	public void setCaseUtile() {
-		this.caseUtile = true;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	@Override

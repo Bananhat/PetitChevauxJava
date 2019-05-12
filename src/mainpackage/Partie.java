@@ -1,6 +1,6 @@
 package mainpackage;
 /**
- * La classe <b> Partie </p> contient la boucle principale du jeu et les méthodes d'initialisations 
+ * La classe <b> Partie </p> contient la boucle principale du jeu et les mï¿½thodes d'initialisations 
  * @author Samuel	
  */
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class Partie {
 	public void initialiserPlateau() 
 	{
 		//Init du chemin
-		for(int i=0; i<56;i++)
+		for(int i=0; i<55;i++)
 		{
 			plateau.getChemin().add(new CaseDeChemin());
 		}
@@ -117,6 +117,7 @@ public class Partie {
 		{
 			return cheval.deplacerPionA(de, plateau, jCourant);
 		}
+		/*
 		else 
 		{
 			try {
@@ -126,6 +127,7 @@ public class Partie {
 				e.getMessage();
 			}
 		}
+		*/
 		return false;
 		
 	}

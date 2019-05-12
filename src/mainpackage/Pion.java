@@ -36,7 +36,7 @@ public class Pion {
 	{
 		this.pos+=num;
 	}
-	public boolean deplacementFinal(int num, Plateau p) throws CasePleineException //retourne false quand le pion ne peut se déplacer
+	public boolean deplacementFinal(int num, Plateau p) // throws CasePleineException //retourne false quand le pion ne peut se dï¿½placer
 	{
 		posCaseNumerote++;
 		Case oldCase;
@@ -48,7 +48,7 @@ public class Pion {
 		else {
 			oldCase = (CaseDEchelle) p.getEchelle().get(this.couleur.getNum()).get(posCaseNumerote-1);
 		}
-		if(caseARemplir.listeChevaux.isEmpty()) //on vérifie que la case est libre
+		if(caseARemplir.listeChevaux.isEmpty()) //on vï¿½rifie que la case est libre
 		{ 
 			caseARemplir.ajouteCheval(this);
 			oldCase.retireCheval(this);
@@ -56,19 +56,20 @@ public class Pion {
 		}
 		else {
 			posCaseNumerote--;
-			throw new CasePleineException("La case est déjà occupé..");
+			// throw new CasePleineException("La case est dï¿½jï¿½ occupï¿½..");
+			return false;
 		}
 	}
-	public boolean deplacementFinalTest(int num, Plateau p) throws CasePleineException 
+	public boolean deplacementFinalTest(int num, Plateau p) // throws CasePleineException
 	{
-		if(posCaseNumerote+1 == 6) //on vérifie que le joueur ne dépasse pas 6
+		if(posCaseNumerote+1 == 6) //on vï¿½rifie que le joueur ne dï¿½passe pas 6
 		{
 			return false;
 		}
 		else {
 			
 		
-		if(posCaseNumerote == -1 && num==1) { //on commence l'entrée à 0
+		if(posCaseNumerote == -1 && num==1) { //on commence l'entrï¿½e ï¿½ 0
 			return this.deplacementFinal(num, p);
 		}
 		else {
@@ -94,7 +95,7 @@ public class Pion {
 		boolean estEnPiste=false;
 		int indice = 0;
 		
-		for(Case c : p.getChemin()) { //vérifie que le pion est bien en piste
+		for(Case c : p.getChemin()) { //vï¿½rifie que le pion est bien en piste
 			if(c.getChevaux().contains(this)) {
 			
 				estEnPiste = true;
@@ -106,7 +107,7 @@ public class Pion {
 			{
 				if ( p.getChemin().get(this.getPos()+1).peutPasser(this) ) 
 				{
-					//vérification fin tour
+					//vï¿½rification fin tour
 					if(p.getChemin().get(this.getPos()+1) == jCourant.getCaseDeDepart())
 					{
 						this.FiniTour = true;
@@ -162,7 +163,7 @@ public class Pion {
 			}
 			return true;
 	}
-	else //faire une exception plutôt
+	else //faire une exception plutï¿½t
 	{
 		System.out.println("Veuillez selectionner un cheval en piste...");
 		return false;

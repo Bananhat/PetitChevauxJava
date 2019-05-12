@@ -3,6 +3,8 @@ package mainpackage;
 import java.util.ArrayList;
 
 public class CaseDeChemin extends Case {
+	private int num;
+	public static int num_cases;
 	public CaseDeChemin() {
 		super();
 		listeChevaux = new ArrayList<Pion>();

@@ -58,91 +58,133 @@ public class Plateau {
 		}
 	}
 
-	public void ajouteLigneChemin(int indice) {
-		for(int i = 0; i < indice; i++) {
-			this.totalCases.add(this.caseDeChemin.get(compteurChemin));
-			compteurChemin += 1;
+	public void ajouteChemin(int indice) {
+		indice--;
+		this.totalCases.add(this.caseDeChemin.get(indice));
+	}
+
+	public void ajouteLigneChemin(int l1, int l2) {
+		l1--;
+		l2--;
+		if(l1 > l2) {
+			for(int i = l1; i >= l2; i--) {
+				this.totalCases.add(this.caseDeChemin.get(i));
+			}
+		}
+		else {
+			for(int i = l1; i <= l2; i++) {
+				this.totalCases.add(this.caseDeChemin.get(i));
+			}
 		}
 	}
 
-	public void ajouteLigneEchelle(int indiceEchelle, int indice) {
-		for(int i = 0; i < indice; i++) {
-			this.totalCases.add(this.echelles.get(indiceEchelle).get(compteurEchelle % 6));
-			compteurEchelle += 1;
+	public void ajouteLigneEchelle(int indiceEchelle, int indice, int ordre) {
+		if(ordre==0) {
+			for(int i = 0; i < indice; i++) {
+				this.totalCases.add(this.echelles.get(indiceEchelle).get(compteurEchelle % 6));
+				compteurEchelle += 1;
+			}
 		}
-	}
+		else {
+			for(int i = 0; i < indice; i++) {
+				this.totalCases.add(this.echelles.get(indiceEchelle).get(Math.abs((compteurEchelle % 6)-5)));
+				compteurEchelle += 1;
+			}
+		}
 
-	public void ajouteLigneEcurieUtile(String color, int indice) {
-		for(int i = 0; i < indice; i++) {
-			this.caseEcurie.get(compteurEcurie).setColor(color);
-			this.caseEcurie.get(compteurEcurie).setCaseUtile();
-			this.totalCases.add(this.caseEcurie.get(compteurEcurie));
-			compteurEcurie += 1;
-		}
 	}
 
 	public void initTotalCases() {
 		ajouteLigneEcurie("r");
-		ajouteLigneChemin(3);
+		ajouteLigneChemin(12,14);
 		ajouteLigneEcurie("b");
 
+		int a = 11;
+		int b = 15;
 		for(int i = 0; i < 5; i++) {
 			ajouteLigneEcurie("r");
-			ajouteLigneChemin(1);
-			ajouteLigneEchelle(0,1);
-			ajouteLigneChemin(1);
+			ajouteChemin(a);
+			ajouteLigneEchelle(0,1,0);
+			ajouteChemin(b);
 			ajouteLigneEcurie("b");
+			a--;
+			b++;
 		}
 
-		ajouteLigneChemin(7);
-		ajouteLigneEchelle(0,1);
-		ajouteLigneChemin(7);
+		ajouteLigneChemin(1,7);
+		ajouteLigneEchelle(0,1,0);
+		ajouteLigneChemin(19,25);
 
-		ajouteLigneChemin(1);
-		ajouteLigneEchelle(1,6);
-		// TODO revoir ca
-		this.totalCases.add(new CaseEcurie());
-		ajouteLigneEchelle(2,6);
-		ajouteLigneChemin(1);
+		ajouteChemin(54);
+		ajouteLigneEchelle(1,6,0);
+		ajouteChemin(55);
+		ajouteLigneEchelle(2,6,1);
+		ajouteChemin(26);
 
-		ajouteLigneChemin(7);
-		ajouteLigneEchelle(3,1);
-		ajouteLigneChemin(7);
+		ajouteLigneChemin(53,47);
+		ajouteLigneEchelle(3,1,1);
+		ajouteLigneChemin(33,27);
 
+		a = 46;
+		b = 34;
 		for(int i = 0; i < 5; i++) {
 			ajouteLigneEcurie("v");
-			ajouteLigneChemin(1);
-			ajouteLigneEchelle(3,1);
-			ajouteLigneChemin(1);
+			ajouteChemin(a);
+			ajouteLigneEchelle(0,1,1);
+			ajouteChemin(b);
 			ajouteLigneEcurie("j");
+			a--;
+			b++;
 		}
 
 		ajouteLigneEcurie("v");
-		ajouteLigneChemin(3);
+		ajouteLigneChemin(41,39);
 		ajouteLigneEcurie("j");
 	}
 
 	public void affichage() {
 		int i = 0;
+		System.out.println("size" + this.caseDeChemin.size());
 		for(Case case1 : this.totalCases) {
 			// System.out.println(case1.getClass());
 			if(case1.getChevaux().size() != 0) {
-				System.out.print(ANSI_BLACK_BACKGROUND + "   " + ANSI_RESET);
+				Pion pi = case1.getChevaux().get(0);
+				String size = String.valueOf(case1.getChevaux().size());
+				if(case1.getChevaux().size() == 1) {
+					size = " ";
+				}
+				if(pi.getCouleur() == Couleur.BLEU) {
+					System.out.print(ANSI_BLACK_BACKGROUND + size + "♣ " + ANSI_RESET);
+				}
+				else if (pi.getCouleur() == Couleur.ROUGE) {
+					System.out.print(ANSI_BLACK_BACKGROUND + size + "♥ " + ANSI_RESET);
+				}
+				else if (pi.getCouleur() == Couleur.VERT) {
+					System.out.print(ANSI_BLACK_BACKGROUND + size + "♠ " + ANSI_RESET);
+				}
+				else if (pi.getCouleur() == Couleur.JAUNE) {
+					System.out.print(ANSI_BLACK_BACKGROUND + size + "♠ " + ANSI_RESET);
+				}
 			}
-			else if(case1.getColor() == "r") {
-				System.out.print(ANSI_RED_BACKGROUND + "   " + ANSI_RESET);
+			else if(case1 instanceof CaseEcurie) {
+				if(((CaseEcurie) case1).getColor() == "r") {
+					System.out.print(ANSI_RED_BACKGROUND + "   " + ANSI_RESET);
+				}
+				else if(((CaseEcurie) case1).getColor() == "v") {
+					System.out.print(ANSI_GREEN_BACKGROUND + "   " + ANSI_RESET);
+				}
+				else if(((CaseEcurie) case1).getColor() == "j") {
+					System.out.print(ANSI_YELLOW_BACKGROUND + "   " + ANSI_RESET);
+				}
+				else if(((CaseEcurie) case1).getColor() == "b") {
+					System.out.print(ANSI_BLUE_BACKGROUND + "   " + ANSI_RESET);
+				}
 			}
-			else if(case1.getColor() == "v") {
-				System.out.print(ANSI_GREEN_BACKGROUND + "   " + ANSI_RESET);
+			else if (case1 instanceof CaseDEchelle) {
+				System.out.print(ANSI_PURPLE_BACKGROUND + " " + ((CaseDEchelle) case1).getNum() + " " + ANSI_RESET);
 			}
-			else if(case1.getColor() == "j") {
-				System.out.print(ANSI_YELLOW_BACKGROUND + "   " + ANSI_RESET);
-			}
-			else if(case1.getColor() == "b") {
-				System.out.print(ANSI_BLUE_BACKGROUND + "   " + ANSI_RESET);
-			}
-			else if(case1.getColor() == "null") {
-				System.out.print(ANSI_WHITE_BACKGROUND + "   " + ANSI_RESET);
+			else {
+				System.out.print(ANSI_WHITE_BACKGROUND + " . " + ANSI_RESET);
 			}
 
 			i++;
