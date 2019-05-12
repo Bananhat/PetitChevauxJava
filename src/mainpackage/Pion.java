@@ -36,7 +36,7 @@ public class Pion {
 	{
 		this.pos+=num;
 	}
-	public boolean deplacementFinal(int num, Plateau p) //retourne false quand le pion ne peut se déplacer
+	public boolean deplacementFinal(int num, Plateau p) throws CasePleineException //retourne false quand le pion ne peut se déplacer
 	{
 		posCaseNumerote++;
 		Case oldCase;
@@ -56,10 +56,10 @@ public class Pion {
 		}
 		else {
 			posCaseNumerote--;
-			return false;
+			throw new CasePleineException("La case est déjà occupé..");
 		}
 	}
-	public boolean deplacementFinalTest(int num, Plateau p) 
+	public boolean deplacementFinalTest(int num, Plateau p) throws CasePleineException 
 	{
 		if(posCaseNumerote+1 == 6) //on vérifie que le joueur ne dépasse pas 6
 		{

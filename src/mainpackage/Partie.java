@@ -1,5 +1,8 @@
 package mainpackage;
-
+/**
+ * La classe <b> Partie </p> contient la boucle principale du jeu et les méthodes d'initialisations 
+ * @author Samuel	
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +26,11 @@ public class Partie {
 	public Scanner getScan() {
 		return sc;
 	}
-	//Init;
+	/**
+     * Initialise chaque joueur en demandant son nom et en lui ajoutant des chevaux
+     * 
+     * @param nbJoueur le nombre de joueur
+     */
 	public void initialiserJoueurs(int nbJoueur) 
 	{
         Scanner sc = new Scanner(System.in);
@@ -112,15 +119,23 @@ public class Partie {
 		}
 		else 
 		{
-			return cheval.deplacementFinal(de, plateau);
+			try {
+				return cheval.deplacementFinal(de, plateau);
+			} catch (CasePleineException e) {
+				// TODO Auto-generated catch block
+				e.getMessage();
+			}
 		}
+		return false;
 		
 	}
 	public void proposerChoixDeplacement()
 	{
 		int reponse;
+		do {
 		System.out.println("Quel cheval voulez vous deplacer ? :");
 		reponse = sc.nextInt();
+		}while(reponse <=0 || reponse > 4);
 		appDeplacement(reponse);
 	}
 	
