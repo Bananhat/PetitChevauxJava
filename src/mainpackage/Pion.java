@@ -30,7 +30,7 @@ public class Pion {
 	public int getPos() 
 	{
 		// TODO Auto-generated method stub
-		return pos;
+		return pos%56;
 	}
 	public void augmentePos(int num) 
 	{
@@ -85,7 +85,10 @@ public class Pion {
 	public void deplacement(Plateau p, int num)
 	{
 		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
-		p.getChemin().get(this.getPos()-num).retireCheval(this);//on retire le cheval de l'ancienne
+		int oldPos = ( this.getPos() -num ) % 56;
+		if (oldPos<0) oldPos += 56;
+		System.out.println(oldPos);
+		p.getChemin().get(oldPos).retireCheval(this);//on retire le cheval de l'ancienne
 	}
 	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) 
 	{
@@ -112,6 +115,7 @@ public class Pion {
 					{
 						this.FiniTour = true;
 						posCaseNumerote=-1;
+						indice = i;
 						peutDeplacer = false;
 					} else
 					{
@@ -154,6 +158,7 @@ public class Pion {
 			else if(this.FiniTour)
 			{
 				System.out.println("c'est la fin du tour");
+				deplacement(p, indice+1);
 			}
 			else
 			{
