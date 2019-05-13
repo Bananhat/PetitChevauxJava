@@ -51,38 +51,43 @@ public class Partie {
         }
       
 	}
+	public void ajouteEcurie(int indice) {
+		for(int i = 0; i < indice; i++) {
+			plateau.getEcuries().add(new CaseEcurie());
+		}
+	}
 	public void initEcurie() 
 	{
-		/*
-		ton ancien code
-			for(Joueur j : listeJoueur)
-			{
-				for(Pion p : j.getChevaux())
-				{
-					plateau.getEcuries().add(p.getCaseEc());
-					p.getCaseEc().ajouteCheval(p);
-				}
-			}
-		*/
-
-		// TODO Il faut s'arranger pour placer les chevaux sur les bonnes cases dans la grande liste totalCases pour l'affichage.
-		// TODO Il faut également modifier leur position de départ sur la bonne case dans totalCases.
-		for(int j = 0;j<4;j++) {
-			for(Pion p : listeJoueur.get(j).getChevaux())
-			{
-				plateau.getEcuries().add(p.getCaseEc());
-				p.getCaseEc().ajouteCheval(p);
-			}
-			for(int i = 0; i < 32; i++) {
-				plateau.getEcuries().add(new CaseEcurie());
-			}
+		ajouteEcurie(12);
+		for(Pion p : listeJoueur.get(0).getChevaux())
+		{
+			plateau.getEcuries().add(p.getCaseEc());
+			p.getCaseEc().ajouteCheval(p);
 		}
-
+		ajouteEcurie(4);
+		for(Pion p : listeJoueur.get(1).getChevaux())
+		{
+			plateau.getEcuries().add(p.getCaseEc());
+			p.getCaseEc().ajouteCheval(p);
+		}
+		ajouteEcurie(60);
+		for(Pion p : listeJoueur.get(3).getChevaux())
+		{
+			plateau.getEcuries().add(p.getCaseEc());
+			p.getCaseEc().ajouteCheval(p);
+		}
+		ajouteEcurie(4);
+		for(Pion p : listeJoueur.get(2).getChevaux())
+		{
+			plateau.getEcuries().add(p.getCaseEc());
+			p.getCaseEc().ajouteCheval(p);
+		}
+		ajouteEcurie(48);
 	}
 	public void initialiserPlateau() 
 	{
 		//Init du chemin
-		for(int i=0; i<55;i++)
+		for(int i=0; i<56;i++)
 		{
 			plateau.getChemin().add(new CaseDeChemin());
 		}

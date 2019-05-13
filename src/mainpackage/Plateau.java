@@ -95,14 +95,14 @@ public class Plateau {
 	}
 
 	public void initTotalCases() {
-		ajouteLigneEcurie("r");
-		ajouteLigneChemin(12,14);
+		ajouteLigneEcurie("j");
+		ajouteLigneChemin(13,15);
 		ajouteLigneEcurie("b");
 
-		int a = 11;
-		int b = 15;
+		int a = 12;
+		int b = 16;
 		for(int i = 0; i < 5; i++) {
-			ajouteLigneEcurie("r");
+			ajouteLigneEcurie("j");
 			ajouteChemin(a);
 			ajouteLigneEchelle(0,1,0);
 			ajouteChemin(b);
@@ -113,33 +113,33 @@ public class Plateau {
 
 		ajouteLigneChemin(1,7);
 		ajouteLigneEchelle(0,1,0);
-		ajouteLigneChemin(19,25);
+		ajouteLigneChemin(21,27);
 
-		ajouteChemin(54);
+		ajouteChemin(56);
 		ajouteLigneEchelle(1,6,0);
-		ajouteChemin(55);
+		this.totalCases.add(new CaseEcurie());
 		ajouteLigneEchelle(2,6,1);
-		ajouteChemin(26);
+		ajouteChemin(28);
 
-		ajouteLigneChemin(53,47);
+		ajouteLigneChemin(55,49);
 		ajouteLigneEchelle(3,1,1);
-		ajouteLigneChemin(33,27);
+		ajouteLigneChemin(35,29);
 
-		a = 46;
-		b = 34;
+		a = 48;
+		b = 36;
 		for(int i = 0; i < 5; i++) {
-			ajouteLigneEcurie("v");
+			ajouteLigneEcurie("r");
 			ajouteChemin(a);
 			ajouteLigneEchelle(0,1,1);
 			ajouteChemin(b);
-			ajouteLigneEcurie("j");
+			ajouteLigneEcurie("v");
 			a--;
 			b++;
 		}
 
+		ajouteLigneEcurie("r");
+		ajouteLigneChemin(43,41);
 		ajouteLigneEcurie("v");
-		ajouteLigneChemin(41,39);
-		ajouteLigneEcurie("j");
 	}
 
 	public void affichage() {
@@ -154,16 +154,16 @@ public class Plateau {
 					size = " ";
 				}
 				if(pi.getCouleur() == Couleur.BLEU) {
-					System.out.print(ANSI_BLACK_BACKGROUND + size + "♣ " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND + size + "B " + ANSI_RESET);
 				}
 				else if (pi.getCouleur() == Couleur.ROUGE) {
-					System.out.print(ANSI_BLACK_BACKGROUND + size + "♥ " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND + size + "R " + ANSI_RESET);
 				}
 				else if (pi.getCouleur() == Couleur.VERT) {
-					System.out.print(ANSI_BLACK_BACKGROUND + size + "♠ " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND + size + "V�" + ANSI_RESET);
 				}
 				else if (pi.getCouleur() == Couleur.JAUNE) {
-					System.out.print(ANSI_BLACK_BACKGROUND + size + "♠ " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND + size + "J " + ANSI_RESET);
 				}
 			}
 			else if(case1 instanceof CaseEcurie) {
@@ -179,12 +179,15 @@ public class Plateau {
 				else if(((CaseEcurie) case1).getColor() == "b") {
 					System.out.print(ANSI_BLUE_BACKGROUND + "   " + ANSI_RESET);
 				}
+				else {
+					System.out.print(ANSI_BLACK_BACKGROUND + "   " + ANSI_RESET);
+				}
 			}
 			else if (case1 instanceof CaseDEchelle) {
 				System.out.print(ANSI_PURPLE_BACKGROUND + " " + ((CaseDEchelle) case1).getNum() + " " + ANSI_RESET);
 			}
 			else {
-				System.out.print(ANSI_WHITE_BACKGROUND + " . " + ANSI_RESET);
+				System.out.print(ANSI_CYAN_BACKGROUND + " . " + ANSI_RESET);
 			}
 
 			i++;

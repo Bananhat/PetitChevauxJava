@@ -105,10 +105,10 @@ public class Pion {
 		{
 			for(int i=0; i<num;i++) 
 			{
-				if ( p.getChemin().get(this.getPos()+1).peutPasser(this) ) 
+				if ( p.getChemin().get((this.getPos()+1)%56).peutPasser(this) ) 
 				{
 					//v�rification fin tour
-					if(p.getChemin().get(this.getPos()+1) == jCourant.getCaseDeDepart())
+					if(p.getChemin().get((this.getPos()+1)%56) == jCourant.getCaseDeDepart())
 					{
 						this.FiniTour = true;
 						posCaseNumerote=-1;
