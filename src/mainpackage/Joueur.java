@@ -49,4 +49,15 @@ public class Joueur {
 	public Pion choisirPion(int num, Plateau plateau) {
 		return null;
 	}
+	public boolean sortirCheval(Pion pion, Plateau plateau) {
+		// TODO Auto-generated method stub
+		if (!pion.getEstEnPiste(plateau))
+		{
+			this.getCaseDeDepart().ajouteCheval(pion); //On ajoute le cheval au chemin
+			plateau.retirerEcurie(this, pion); //On retire de l'�curie
+			return true;
+		}
+		return false;
+
+	}
 }

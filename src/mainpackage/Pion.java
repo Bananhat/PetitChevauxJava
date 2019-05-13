@@ -87,41 +87,38 @@ public class Pion {
 		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
 		int oldPos = ( this.getPos() -num ) % 56;
 		if (oldPos<0) oldPos += 56;
-		System.out.println(oldPos);
+		System.out.println("OLDPOS VAUT" + oldPos);
 		p.getChemin().get(oldPos).retireCheval(this);//on retire le cheval de l'ancienne
 	}
-	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) 
+	public boolean getEstEnPiste(Plateau p)
 	{
-		boolean peutDeplacer = true;
-		int old_pos = this.pos;
-		boolean doitManger = false;
-		boolean estEnPiste=false;
-		int indice = 0;
-		
+		boolean estEnPiste = false;
 		for(Case c : p.getChemin()) { //v�rifie que le pion est bien en piste
 			if(c.getChevaux().contains(this)) {
 			
 				estEnPiste = true;
 			}
 		}
+		return estEnPiste;
+	}
+	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) 
+	{
+		boolean peutDeplacer = true;
+		int old_pos = this.pos;
+		boolean doitManger = false;
+		boolean estEnPiste=this.getEstEnPiste(p);
+		int indice = 0;
+		int i=0;
+		
 		if(estEnPiste)
 		{
-			for(int i=0; i<num;i++) 
+			 
+			while(i < num && p.getChemin().get((this.getPos()+1)%56) != jCourant.getCaseDeDepart() )
 			{
 				if ( p.getChemin().get((this.getPos()+1)%56).peutPasser(this) ) 
 				{
 					//v�rification fin tour
-					if(p.getChemin().get((this.getPos()+1)%56) == jCourant.getCaseDeDepart())
-					{
-						this.FiniTour = true;
-						posCaseNumerote=-1;
-						indice = i;
-						peutDeplacer = false;
-					} else
-					{
 						this.augmentePos(1);
-					}
-					
 				}
 				else 
 				{
@@ -132,9 +129,19 @@ public class Pion {
 					}
 					peutDeplacer = false;
 				}
+				i++;
 		
 			}
-			if(doitManger) 
+			if (p.getChemin().get((this.getPos()+1)%56) == jCourant.getCaseDeDepart())
+			{
+				this.FiniTour = true;
+				posCaseNumerote=-1;
+				peutDeplacer = false;
+			}
+			else
+				{
+				if(doitManger) 
+				
 			{
 				for(Pion pion : p.getChemin().get(indice).getChevaux()) {
 					if(pion.couleur != this.couleur) 
@@ -157,8 +164,9 @@ public class Pion {
 			}
 			else if(this.FiniTour)
 			{
+				System.out.println("la valeur de l'indice est : "+i);
 				System.out.println("c'est la fin du tour");
-				deplacement(p, indice+1);
+				deplacement(p, i);
 			}
 			else
 			{
@@ -166,6 +174,7 @@ public class Pion {
 				System.out.println("Impossible de se deplacer");
 				return false;
 			}
+				}
 			return true;
 	}
 	else //faire une exception plut�t

@@ -109,11 +109,8 @@ public class Partie {
 	private int lancerDe() {
 		return (int) (Math.random() * (6)+1);
 	}
-	public void SortirCheval(int reponse)
-	{
-		jCourant.getCaseDeDepart().ajouteCheval(jCourant.getChevaux().get(reponse-1)); //On ajoute le cheval au chemin
-		plateau.retirerEcurie(jCourant, jCourant.getChevaux().get(reponse-1)); //On retire de l'�curie
-	}
+	
+
 	
 	public boolean appDeplacement(int reponse) 
 	{
@@ -148,15 +145,18 @@ public class Partie {
 	
 	public void proposerChoixSorti()
 	{
-		System.out.println("Quel cheval voulez vous sortir ? :");
-		int reponse = sc.nextInt();
-		
-		SortirCheval(reponse);
+	
+		int reponse;
+		do {
+			System.out.println("Quel cheval voulez vous sortir ? :");
+			reponse = sc.nextInt();
+		}while(!jCourant.sortirCheval(jCourant.getChevaux().get(reponse-1), plateau));
 	}
 	// Game
 	public void jouerUnTour()
 	{
 		plateau.affichage();
+		
 		//TEST SORTI ECURIE
 		int i=0;
 		for(Case c : plateau.getEcuries()) {
@@ -189,6 +189,8 @@ public class Partie {
 		de = 6;
 		System.out.println("A Joueur "+(numJ+1)+" de jouer");
 		System.out.println("La valeur du d� est : "+de);
+		de = 52;
+		numJ=0;
 		jCourant = listeJoueur.get(numJ);
 		
 		if(!jCourant.getSorti()) // si le jCourant n'a aucun cheval sur le plateau 
