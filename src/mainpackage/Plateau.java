@@ -104,7 +104,8 @@ public class Plateau {
 		for(int i = 0; i < 5; i++) {
 			ajouteLigneEcurie("j");
 			ajouteChemin(a);
-			ajouteLigneEchelle(0,1,0);
+			// Echelle bleue
+			ajouteLigneEchelle(1,1,0);
 			ajouteChemin(b);
 			ajouteLigneEcurie("b");
 			a--;
@@ -112,16 +113,20 @@ public class Plateau {
 		}
 
 		ajouteLigneChemin(1,7);
-		ajouteLigneEchelle(0,1,0);
+		// Echelle bleue
+		ajouteLigneEchelle(1,1,0);
 		ajouteLigneChemin(21,27);
 
 		ajouteChemin(56);
-		ajouteLigneEchelle(1,6,0);
+		// Echelle Jaune
+		ajouteLigneEchelle(0,6,0);
 		this.totalCases.add(new CaseEcurie());
+		// Echelle Verte
 		ajouteLigneEchelle(2,6,1);
 		ajouteChemin(28);
 
 		ajouteLigneChemin(55,49);
+		// Echelle Rouge
 		ajouteLigneEchelle(3,1,1);
 		ajouteLigneChemin(35,29);
 
@@ -130,7 +135,8 @@ public class Plateau {
 		for(int i = 0; i < 5; i++) {
 			ajouteLigneEcurie("r");
 			ajouteChemin(a);
-			ajouteLigneEchelle(0,1,1);
+			// Echelle rouge
+			ajouteLigneEchelle(3,1,1);
 			ajouteChemin(b);
 			ajouteLigneEcurie("v");
 			a--;
