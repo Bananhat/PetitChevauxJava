@@ -160,7 +160,7 @@ public class Plateau {
 					System.out.print(ANSI_WHITE_BACKGROUND + size + "R " + ANSI_RESET);
 				}
 				else if (pi.getCouleur() == Couleur.VERT) {
-					System.out.print(ANSI_WHITE_BACKGROUND + size + "V " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND + size + "V " + ANSI_RESET);
 				}
 				else if (pi.getCouleur() == Couleur.JAUNE) {
 					System.out.print(ANSI_WHITE_BACKGROUND + size + "J " + ANSI_RESET);
@@ -208,6 +208,7 @@ public class Plateau {
 				c.listeChevaux.remove(pion);
 			}
 		}
+		jCourant.setSorti(true);
 	}
 
 }

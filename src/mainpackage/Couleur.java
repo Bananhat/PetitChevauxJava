@@ -1,11 +1,11 @@
 package mainpackage;
 
 public enum Couleur {
-	JAUNE('j',0), BLEU('b',1), VERT('v',2), ROUGE('r',3);
-	private char symbole;
+	JAUNE("Jaune",0), BLEU("Bleu",1), VERT("Vert",2), ROUGE("Rouge",3);
+	private String symbole;
 	private int num;
 	
-	Couleur(char s, int num) 
+	Couleur(String s, int num) 
 	{
 		this.symbole = s;
 		this.num = num;
@@ -14,7 +14,7 @@ public enum Couleur {
 	public int getNum() {
 		return num;
 	}
-	public char getSymbole() 
+	public String getSymbole() 
 	{
 		return this.symbole;
 	}

@@ -21,6 +21,19 @@ public class Partie {
 		initialiserPlateau();
 		initialiserJoueurs(4);
 		initEcurie();
+		
+		//Test Sauv
+		Pion p = this.listeJoueur.get(0).getChevaux().get(0);
+		p.setPos(52);
+		plateau.retirerEcurie(this.listeJoueur.get(0), p);
+		plateau.getChemin().get(p.getPos()).getChevaux().add(p);
+		Pion p2 = this.listeJoueur.get(3).getChevaux().get(0);
+		p2.setPos(51);
+		plateau.retirerEcurie(this.listeJoueur.get(3), p2);
+		plateau.getChemin().get(p2.getPos()).getChevaux().add(p2);
+		
+		
+		
 		plateau.initTotalCases();
 	}
 	public Scanner getScan() {
@@ -49,6 +62,7 @@ public class Partie {
                
             }
         }
+        
       
 	}
 	public void ajouteEcurie(int indice) {
@@ -119,28 +133,28 @@ public class Partie {
 		{
 			return cheval.deplacerPionA(de, plateau, jCourant);
 		}
-		/*
 		else 
 		{
-			try {
-				return cheval.deplacementFinal(de, plateau);
-			} catch (CasePleineException e) {
-				// TODO Auto-generated catch block
-				e.getMessage();
-			}
+			return cheval.deplacementFinalTest(de, plateau);
 		}
-		*/
-		return false;
 		
 	}
 	public void proposerChoixDeplacement()
 	{
 		int reponse;
+		String ouiounon;
+	
+		System.out.println("Voulez vous vous deplacer ?");
+		ouiounon = sc.nextLine();
+		
+		if(ouiounon.equals("o")) 
+		{
 		do {
 		System.out.println("Quel cheval voulez vous deplacer ? :");
 		reponse = sc.nextInt();
 		}while(reponse <=0 || reponse > 4);
 		appDeplacement(reponse);
+		}
 	}
 	
 	public void proposerChoixSorti()
@@ -157,40 +171,15 @@ public class Partie {
 	{
 		plateau.affichage();
 		
-		//TEST SORTI ECURIE
-		int i=0;
-		for(Case c : plateau.getEcuries()) {
-			for(Pion p : c.getChevaux()) {
-				i++;
-			}
-		}
-		System.out.println("Il y a "+i+" chevaux dans l'�curie..");
-		// FIN TEST SORTI
-		//TEST CHEMIN et POSITION DES CHEVAUX
-		i=0;
-		int j=0;
-		for(Case c: plateau.getChemin()) {
-			
-			for(Pion p : c.getChevaux()) {
-				i++;
-				System.out.println("La position du cheval est "+p.getPos());
-				System.out.println(j);
-			}
-			j++;
-		}
+	
 		
-		System.out.println("Il y a "+i+" chevaux sur le chemin");
-		//FIN TEST CHEMIN
-		
-		//
 		int reponse;
 		String reponseSortir;
 		this.de = lancerDe();
-		de = 6;
-		System.out.println("A Joueur "+(numJ+1)+" de jouer");
-		System.out.println("La valeur du d� est : "+de);
-		de = 52;
-		numJ=0;
+
+		System.out.println("A Joueur "+Couleur.values()[numJ].getSymbole()+" de jouer");
+		System.out.println("La valeur du de est : "+de);
+		
 		jCourant = listeJoueur.get(numJ);
 		
 		if(!jCourant.getSorti()) // si le jCourant n'a aucun cheval sur le plateau 
@@ -210,7 +199,7 @@ public class Partie {
 		{
 			if(de == 6) 
 			{
-				sc.nextLine();
+				
 				System.out.println("Voulez vous sortir un pion ? o/n : ");
 				reponseSortir = sc.nextLine();
 				if(reponseSortir.equals("o"))

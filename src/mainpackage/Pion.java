@@ -1,5 +1,6 @@
 package mainpackage;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Pion {
@@ -9,8 +10,10 @@ public class Pion {
 	private int posCaseNumerote;
 	private CaseEcurie caseEc;
 	private boolean FiniTour;
-	public Pion(String id, Couleur c) 
+	private Joueur j;
+	public Pion(String id, Couleur c, Joueur j) 
 	{
+		this.j = j;
 		this.id = id;
 		caseEc = new CaseEcurie();
 		this.couleur = c;
@@ -62,6 +65,7 @@ public class Pion {
 	}
 	public boolean deplacementFinalTest(int num, Plateau p) // throws CasePleineException
 	{
+		System.out.println("Je suis dans deplacementFinal");
 		if(posCaseNumerote+1 == 6) //on v�rifie que le joueur ne d�passe pas 6
 		{
 			return false;
@@ -70,6 +74,7 @@ public class Pion {
 			
 		
 		if(posCaseNumerote == -1 && num==1) { //on commence l'entr�e � 0
+			System.out.println("Je suis dans la condition");
 			return this.deplacementFinal(num, p);
 		}
 		else {
@@ -87,7 +92,7 @@ public class Pion {
 		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
 		int oldPos = ( this.getPos() -num ) % 56;
 		if (oldPos<0) oldPos += 56;
-		System.out.println("OLDPOS VAUT" + oldPos);
+		System.out.println(oldPos);
 		p.getChemin().get(oldPos).retireCheval(this);//on retire le cheval de l'ancienne
 	}
 	public boolean getEstEnPiste(Plateau p)
@@ -110,14 +115,14 @@ public class Pion {
 		int indice = 0;
 		int i=0;
 		
+		
 		if(estEnPiste)
 		{
-			 
-			while(i < num && p.getChemin().get((this.getPos()+1)%56) != jCourant.getCaseDeDepart() )
+			while(i<num && p.getChemin().get((this.getPos()+1)%56) != jCourant.getCaseDeDepart() && !doitManger && peutDeplacer)
 			{
 				if ( p.getChemin().get((this.getPos()+1)%56).peutPasser(this) ) 
 				{
-					//v�rification fin tour
+					//vérification fin tour
 						this.augmentePos(1);
 				}
 				else 
@@ -132,23 +137,34 @@ public class Pion {
 				i++;
 		
 			}
+		
 			if (p.getChemin().get((this.getPos()+1)%56) == jCourant.getCaseDeDepart())
 			{
-				this.FiniTour = true;
-				posCaseNumerote=-1;
-				peutDeplacer = false;
+						this.FiniTour = true;
+						posCaseNumerote=-1;
+						peutDeplacer = false;
+						
 			}
-			else
-				{
-				if(doitManger) 
-				
+			if(this.FiniTour == true)
 			{
-				for(Pion pion : p.getChemin().get(indice).getChevaux()) {
+						System.out.println("c'est la fin du tour");
+						deplacement(p, i);
+			}
+
+			else{
+			if(doitManger) 
+			{
+				System.out.println("L'indice est de "+indice);
+				System.out.println("La pos est de : "+this.getPos());
+				ArrayList<Pion> listeAEjecter = new  ArrayList<Pion>();
+				for(Pion pion : p.getChemin().get((this.getPos()+1)%56).getChevaux()) 
+				{
 					if(pion.couleur != this.couleur) 
 					{
-						retourneEcurie(p);
-						this.pos++;
-						deplacement(p, num);
+						System.out.println("la position a ejecter "+(this.getPos()+1));
+						listeAEjecter.add(pion);
+						System.out.println("Je suis la !!");
+						
 					}
 					else 
 					{
@@ -156,17 +172,18 @@ public class Pion {
 						System.out.println("Impossible de se deplacer");
 					}
 				}
-				
+				for(Pion p2 : listeAEjecter)
+				{
+					p2.retourneEcurie(p, (this.getPos()+1)%56);
+				}
+			
+				System.out.println("passer");
+				this.augmentePos(1);
+				deplacement(p, num);
 			}
 			else if (peutDeplacer) 
 			{
 				deplacement(p, num);
-			}
-			else if(this.FiniTour)
-			{
-				System.out.println("la valeur de l'indice est : "+i);
-				System.out.println("c'est la fin du tour");
-				deplacement(p, i);
 			}
 			else
 			{
@@ -174,7 +191,7 @@ public class Pion {
 				System.out.println("Impossible de se deplacer");
 				return false;
 			}
-				}
+}
 			return true;
 	}
 	else //faire une exception plut�t
@@ -183,16 +200,42 @@ public class Pion {
 		return false;
 	}
 }
-	public void retourneEcurie(Plateau p) 
+	public void retourneEcurie(Plateau p, int pos) 
 	{
-		p.getChemin().remove(this);
+		System.out.println("pos : "+pos);
+		p.getChemin().get(pos).getChevaux().remove(this);
 		for(Case e : p.getEcuries()) 
 		{
-			if(e==caseEc) {
+			if(e==this.caseEc)
+			{
 				e.ajouteCheval(this);
 			}
 		}
+		verifJoueurSorti(p);
 	}
+	
+	
+	public void verifJoueurSorti(Plateau p)
+	{
+		int ct=0; 
+		for(Case e1 : p.getEcuries())
+		{
+			for(Pion p1 : j.getChevaux())
+			{
+				if(e1.getChevaux().contains(p1))
+				{
+					ct++;
+					System.out.println(ct);
+				}
+			}
+		}
+		if(ct == 4)
+		{
+			j.setSorti(false);
+		}
+	}
+	
+	
 	public CaseEcurie getCaseEc() {
 		// TODO Auto-generated method stub
 		return caseEc;
@@ -201,4 +244,5 @@ public class Pion {
 		// TODO Auto-generated method stub
 		this.pos = i;
 	}
+	
 }

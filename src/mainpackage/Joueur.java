@@ -7,23 +7,25 @@ public class Joueur {
 	private CaseDeChemin CaseDeDepart;
 	private boolean sorti;
 	private Couleur couleur;
-	
 	public Joueur(String nom, Couleur c) 
 	{
 		this.nom = nom;
 		this.couleur = c;
-		listeChevaux = new ArrayList<Pion>(){ { add(new Pion("1", couleur)); add(new Pion("2", couleur)); add(new Pion("3", couleur)); add(new Pion("4", couleur)); } };
+		Joueur self = this;
+		listeChevaux = new ArrayList<Pion>(){ { add(new Pion("1", couleur, self)); add(new Pion("2", couleur, self)); add(new Pion("3", couleur, self)); add(new Pion("4", couleur, self)); } };
 	}
 	public CaseDeChemin getCaseDeDepart() 
 	{
-		sorti = true;
+		
 		return CaseDeDepart;
 	}
+
 
 	public boolean getSorti()
 	{
 		return sorti;
 	}
+	
 	public void setSorti(boolean s) {
 		sorti = s;
 	}
