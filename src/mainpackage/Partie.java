@@ -27,11 +27,12 @@ public class Partie {
 		p.setPos(52);
 		plateau.retirerEcurie(this.listeJoueur.get(0), p);
 		plateau.getChemin().get(p.getPos()).getChevaux().add(p);
+		//
 		Pion p2 = this.listeJoueur.get(3).getChevaux().get(0);
 		p2.setPos(51);
 		plateau.retirerEcurie(this.listeJoueur.get(3), p2);
 		plateau.getChemin().get(p2.getPos()).getChevaux().add(p2);
-		
+		//
 		
 		
 		plateau.initTotalCases();
@@ -131,25 +132,39 @@ public class Partie {
 		Pion cheval = jCourant.getChevaux().get(reponse-1);
 		if(!cheval.aFiniTour())
 		{
-			return cheval.deplacerPionA(de, plateau, jCourant);
+			try {
+				return cheval.deplacerPionA(de, plateau, jCourant);
+			} catch (CasePleineException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
 		}
 		else 
 		{
 			return cheval.deplacementFinalTest(de, plateau);
 		}
+		return false;
 		
 	}
 	public void proposerChoixDeplacement()
 	{
 		int reponse;
-		String ouiounon;
+		String ouiounon = null;
 	
 		System.out.println("Voulez vous vous deplacer ?");
-		ouiounon = sc.nextLine();
+		
+		try
+		{
+			ouiounon = sc.nextLine();
+		}
+		catch(Exception e1)
+		{
+			e1.getMessage();
+		}
 		
 		if(ouiounon.equals("o")) 
 		{
-		do {
+		do { 
 		System.out.println("Quel cheval voulez vous deplacer ? :");
 		reponse = sc.nextInt();
 		}while(reponse <=0 || reponse > 4);
@@ -160,11 +175,18 @@ public class Partie {
 	public void proposerChoixSorti()
 	{
 	
+		char reponseC;
 		int reponse;
-		do {
-			System.out.println("Quel cheval voulez vous sortir ? :");
-			reponse = sc.nextInt();
-		}while(!jCourant.sortirCheval(jCourant.getChevaux().get(reponse-1), plateau));
+			do {
+				do {
+					System.out.println("Quel cheval voulez vous sortir ? :");
+					reponseC = sc.next().charAt(0);	
+				} while(!Character.isDigit(reponseC) || Character.getNumericValue(reponseC) >= 5 || Character.getNumericValue(reponseC)<=0 );
+				
+			reponse = Character.getNumericValue(reponseC);
+			
+			
+			}while(!jCourant.sortirCheval(jCourant.getChevaux().get(reponse-1), plateau));
 	}
 	// Game
 	public void jouerUnTour()

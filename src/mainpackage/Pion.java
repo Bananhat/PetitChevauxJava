@@ -106,7 +106,7 @@ public class Pion {
 		}
 		return estEnPiste;
 	}
-	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) 
+	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) throws CasePleineException 
 	{
 		boolean peutDeplacer = true;
 		int old_pos = this.pos;
@@ -166,10 +166,9 @@ public class Pion {
 						System.out.println("Je suis la !!");
 						
 					}
-					else 
+					else //Impossible de se deplcare
 					{
 						this.pos = old_pos;
-						System.out.println("Impossible de se deplacer");
 					}
 				}
 				for(Pion p2 : listeAEjecter)
@@ -185,11 +184,11 @@ public class Pion {
 			{
 				deplacement(p, num);
 			}
-			else
+			else //Impossible de se déplacer
 			{
 				this.pos = old_pos;
-				System.out.println("Impossible de se deplacer");
-				return false;
+		
+				throw new CasePleineException("Impossible de se déplacer..");
 			}
 }
 			return true;
