@@ -7,19 +7,19 @@ public class CaseDeChemin extends Case {
 	public static int num_cases;
 	public CaseDeChemin() {
 		super();
-		listeChevaux = new ArrayList<Pion>();
+		setListeChevaux(new ArrayList<Pion>());
 	}
 
 	public ArrayList<Pion> getChevaux() {
-		return listeChevaux;
+		return getListeChevaux();
 	}
 	public boolean peutPasser(Pion p) {
 		// TODO Auto-generated method stub
-		if(listeChevaux.isEmpty()) {
+		if(getListeChevaux().isEmpty()) {
 			return true;
 		}
 		else {
-			for(Pion p1 : listeChevaux) {
+			for(Pion p1 : getListeChevaux()) {
 				if(p1.getCouleur() == p.getCouleur()) {
 					return true;
 				}
@@ -35,10 +35,10 @@ public class CaseDeChemin extends Case {
 	}
 	@Override
 	public void ajouteCheval(Pion p) {
-		listeChevaux.add(p);
+		getListeChevaux().add(p);
 	}
 	public void retireCheval(Pion p) {
-		listeChevaux.remove(p);
+		getListeChevaux().remove(p);
 	}
 
 }

@@ -4,18 +4,24 @@ import java.util.ArrayList;
 
 public abstract class Case
 {
-	protected ArrayList<Pion> listeChevaux;
+	private ArrayList<Pion> listeChevaux;
 
 
 
 	public abstract void ajouteCheval(Pion p);
 	public ArrayList<Pion> getChevaux()
 	{
-		return listeChevaux; 
+		return getListeChevaux(); 
 	}
 	public abstract boolean peutPasser(Pion p);
 	public abstract boolean peutSArreter(Pion p);
 
 	public abstract void retireCheval(Pion pion);
+	public ArrayList<Pion> getListeChevaux() {
+		return listeChevaux;
+	}
+	public void setListeChevaux(ArrayList<Pion> listeChevaux) {
+		this.listeChevaux = listeChevaux;
+	}
 
 }

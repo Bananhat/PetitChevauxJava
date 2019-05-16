@@ -1,5 +1,7 @@
 package mainpackage;
 import java.util.ArrayList;
+
+import vue.Plateau;
 public class Joueur {
 	
 	private String nom;
@@ -14,6 +16,46 @@ public class Joueur {
 		Joueur self = this;
 		listeChevaux = new ArrayList<Pion>(){ { add(new Pion("1", couleur, self)); add(new Pion("2", couleur, self)); add(new Pion("3", couleur, self)); add(new Pion("4", couleur, self)); } };
 	}
+	
+	
+	public boolean sortirCheval(Pion pion, Plateau plateau) 
+	{
+		if (!pion.getEstEnPiste(plateau))
+		{
+			
+			if(!this.getCaseDeDepart().getListeChevaux().isEmpty())
+			{
+				pion.ejecterChevaux(plateau, pion.getPos());
+			}
+			this.getCaseDeDepart().ajouteCheval(pion); //On ajoute le cheval au chemin
+			plateau.retirerEcurie(this, pion); //On retire de l'�curie
+			pion.setSorti(true);
+		
+			return true;
+		}
+		return false;
+
+	}
+	
+	public boolean resteASortir(Plateau p)
+	{
+		int i=0;
+		for(Case ec : p.getEcuries())
+		{
+			for(Pion p1 : listeChevaux)
+			{
+				if(ec.getListeChevaux().contains(p1))
+				{
+					i++;
+				}
+			}
+		}
+		return i>0;
+	}
+	
+	
+	
+	//Getter & Setter
 	public CaseDeChemin getCaseDeDepart() 
 	{
 		
@@ -48,18 +90,20 @@ public class Joueur {
 	{
 		return this.couleur;
 	}
-	public Pion choisirPion(int num, Plateau plateau) {
-		return null;
-	}
-	public boolean sortirCheval(Pion pion, Plateau plateau) {
+
+
+	public boolean aDautrePionSorti(Pion pion) {
 		// TODO Auto-generated method stub
-		if (!pion.getEstEnPiste(plateau))
+		for(Pion cheval : this.listeChevaux)
 		{
-			this.getCaseDeDepart().ajouteCheval(pion); //On ajoute le cheval au chemin
-			plateau.retirerEcurie(this, pion); //On retire de l'�curie
-			return true;
+			if(cheval != pion && cheval.getSorti() == true && !cheval.aFiniTour())
+			{
+				System.out.println("Vous avez d'autre pions sortis, deplacez vous avec..");
+				return true;
+			}
 		}
 		return false;
-
 	}
+
+
 }

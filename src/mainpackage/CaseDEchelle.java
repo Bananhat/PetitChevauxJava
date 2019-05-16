@@ -7,7 +7,7 @@ public class CaseDEchelle extends Case
 
 	private int num;
 	public CaseDEchelle(int num) {
-		this.listeChevaux= new ArrayList<Pion>();
+		this.setListeChevaux(new ArrayList<Pion>());
 		this.num = num;
 	}
 	@Override
@@ -24,13 +24,13 @@ public class CaseDEchelle extends Case
 
 	@Override
 	public void ajouteCheval(Pion p) {
-		listeChevaux.add(p);
+		getListeChevaux().add(p);
 	}
 	public int getNum()
 	{
 		return this.num;
 	}
 	public void retireCheval(Pion p) {
-		listeChevaux.remove(p);
+		getListeChevaux().remove(p);
 	}
 }

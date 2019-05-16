@@ -1,10 +1,16 @@
 package mainpackage;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) 
 	{
-		Partie game = new Partie();
+		char rejoue='o';
+		Partie game;
+		Scanner monscan = new Scanner(System.in);
+		do {
+		 game = new Partie();
 		int nbFois6;
 		Joueur j=null;
 		Joueur old_j = null;
@@ -29,7 +35,15 @@ public class Main {
 			
 			
 		}
+		
+		
+		System.out.println("Le joueur "+j.getCouleur().getSymbole()+" a gagné !!");
+		
+		System.out.println("Voulez vous rejouer ?? o/n : ");
+		rejoue = monscan.next().charAt(0);
 		game.getScan().close();
+		} while(rejoue!='n');
+	
 	}
 
 }

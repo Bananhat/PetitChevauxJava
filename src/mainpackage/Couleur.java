@@ -11,6 +11,8 @@ public enum Couleur {
 		this.num = num;
 	}
 	
+	
+	
 	public int getNum() {
 		return num;
 	}

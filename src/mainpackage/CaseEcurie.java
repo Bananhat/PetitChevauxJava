@@ -7,7 +7,7 @@ public class CaseEcurie extends Case{
 
 	public CaseEcurie() {
 		super();
-		listeChevaux = new ArrayList<Pion>();
+		setListeChevaux(new ArrayList<Pion>());
 	}
 
 	public String getColor() {
@@ -32,10 +32,10 @@ public class CaseEcurie extends Case{
 
 	@Override
 	public void ajouteCheval(Pion p) {
-		listeChevaux.add(p);
+		getListeChevaux().add(p);
 	}
 	public ArrayList<Pion> getChevaux(){
-		return listeChevaux;
+		return getListeChevaux();
 	}
 
 	@Override

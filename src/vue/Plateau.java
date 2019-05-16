@@ -1,6 +1,14 @@
-package mainpackage;
+package vue;
 
 import java.util.ArrayList;
+
+import mainpackage.Case;
+import mainpackage.CaseDEchelle;
+import mainpackage.CaseDeChemin;
+import mainpackage.CaseEcurie;
+import mainpackage.Couleur;
+import mainpackage.Joueur;
+import mainpackage.Pion;
 
 public class Plateau {
 	private ArrayList<CaseDeChemin> caseDeChemin;
@@ -150,7 +158,7 @@ public class Plateau {
 
 	public void affichage() {
 		int i = 0;
-		System.out.println("size" + this.caseDeChemin.size());
+
 		for(Case case1 : this.totalCases) {
 			// System.out.println(case1.getClass());
 			if(case1.getChevaux().size() != 0) {
@@ -207,14 +215,15 @@ public class Plateau {
 
 	public void retirerEcurie(Joueur jCourant, Pion pion)
 	{
-		for(Case c : caseEcurie) 
+		for(CaseEcurie c : caseEcurie) 
 		{
-			if(c.listeChevaux.contains(pion)) 
+			if(c.getChevaux().contains(pion)) 
 			{
-				c.listeChevaux.remove(pion);
+				c.getListeChevaux().remove(pion);
 			}
 		}
 		jCourant.setSorti(true);
+		pion.setSorti(true);
 	}
 
 }
