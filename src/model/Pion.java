@@ -10,7 +10,9 @@ import vue.CaseDeChemin;
 import vue.CaseEcurie;
 import vue.Couleur;
 import vue.Plateau;
-
+/**
+ * Défini les propriété d'un Pion
+ */
 public class Pion 
 {
 	private Couleur couleur;
@@ -36,9 +38,12 @@ public class Pion
 	}
 
 
-	
+	/**
+	 * Déplace le pions sur l'echelle numeroté
+	 * @return si l'operation s'est bien déroule
+	 */
 	//deplacement final
-	public boolean deplacementFinal(int num, Plateau p) // throws CasePleineException //retourne false quand le pion ne peut se d�placer
+	public boolean deplacementFinal(int num, Plateau p) throws CasePleineException // throws CasePleineException //retourne false quand le pion ne peut se d�placer
 	{
 		posCaseNumerote++;
 		Case oldCase;
@@ -58,15 +63,17 @@ public class Pion
 		}
 		else {
 			posCaseNumerote--;
-			// throw new CasePleineException("La case est d�j� occup�..");
-			return false;
+			throw new CasePleineException("La case est deja occupe..");
 		}
 	}
 	
 
 
-
-	public boolean deplacementFinalTest(int num, Plateau p) // throws CasePleineException
+	/**
+	 * Controle la validié du déplacement sur les cases numérotés avant d'effectivement déplacer
+	 * @return si l'operation s'est bien déroule
+	 */
+	public boolean deplacementFinalTest(int num, Plateau p) throws CasePleineException // throws CasePleineException
 	{
 		System.out.println("Je suis dans deplacementFinal");
 		if(posCaseNumerote+1 == 6) //on v�rifie que le joueur ne d�passe pas 6
@@ -93,7 +100,9 @@ public class Pion
 	
 	
 	
-	//Deplacement normaux
+	/**
+	 * Déplace le pions sur le chemin 
+	 */
 	public void deplacement(Plateau p, int num)
 	{
 		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
@@ -103,7 +112,11 @@ public class Pion
 		p.getChemin().get(oldPos).retireCheval(this);//on retire le cheval de l'ancienne
 	}
 	
-	
+
+	/**
+	 * Controle la validié du déplacement avant d'effectivement déplacer
+	 * @return si l'operation s'est bien déroule
+	 */
 	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) throws CasePleineException 
 	{
 		boolean peutDeplacer = true;
@@ -183,6 +196,11 @@ public class Pion
 		return false;
 	}
 }
+	
+	/**
+	 * Vérifie la validité d'une ejection avant d'effectivement ejecter un ou des pions
+	 * @return si l'operation s'est bien déroulé
+	 */
 	public boolean ejecterChevaux(Plateau p, int position)
 	{
 		ArrayList<Pion> listeAEjecter = new  ArrayList<Pion>();
@@ -207,7 +225,10 @@ public class Pion
 		return true;
 	}
 	
-	//Verifi et ejecter..
+	/**
+	 * Deplace effectivement un pion dans l'écurie 
+	 */
+
 	public void retourneEcurie(Plateau p, int pos) 
 	{
 		System.out.println("pos : "+pos);
@@ -225,6 +246,11 @@ public class Pion
 	}
 	
 	
+	/**
+	 * Redefini la valeur de la variable Sorti pour redefinir cette variable quand un cheval est ejecter afin de 
+	 * faire reveinr le joueur à 0.
+	 */
+
 	public void verifJoueurSorti(Plateau p)
 	{
 		int ct=0; 
@@ -235,7 +261,6 @@ public class Pion
 				if(e1.getChevaux().contains(p1))
 				{
 					ct++;
-					System.out.println(ct);
 				}
 			}
 		}

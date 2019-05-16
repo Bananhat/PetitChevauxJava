@@ -1,6 +1,6 @@
 package control;
 /**
- * La classe <b> Partie </p> contient la boucle principale du jeu et les m�thodes d'initialisations 
+ * La classe <b> Partie </p> contient la boucle principale du jeu et les methodes d'initialisations 
  * @author Samuel	
  */
 import java.util.ArrayList;
@@ -118,6 +118,7 @@ public class Partie {
             }
       }
         
+	
 	public void ajouteEcurie(int indice) {
 		for(int i = 0; i < indice; i++) {
 			plateau.getEcuries().add(new CaseEcurie());
@@ -151,6 +152,11 @@ public class Partie {
 		}
 		ajouteEcurie(48);
 	}
+	
+	/**
+     * Initialise la plateau de jeu en ajoutant les cases les chemins, les écuries, les echelles
+     */
+	
 	public void initialiserPlateau() 
 	{
 		//Init du chemin
@@ -172,6 +178,10 @@ public class Partie {
 		
 	}
 	
+	/**
+     * Defini une valeur entre 1 et 6 aléatoirement pour le de
+     * @return la valeur du dé
+     */
 	
 	private int lancerDe() {
 		return (int) (Math.random() * (6)+1);
@@ -204,8 +214,9 @@ public class Partie {
 		}
 		
 	}
-
-	// Game
+	/**
+     * La boucle principale du jeu, défini le déroulement du jeu 
+     */
 	public void jouerUnTour()
 	{
 		plateau.affichage();
@@ -284,7 +295,10 @@ public class Partie {
 	}
 	
 	
-	//Test parti fini
+	/**
+     * Vérifie si la partie est terminé
+     * @return Si une partie est oui ou non fini
+     */
 	public boolean estPartieTermine() 
 	{
 		int i;

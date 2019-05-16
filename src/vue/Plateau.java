@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import model.Joueur;
 import model.Pion;
-
+/**
+ * Affiche le plateau et l'initialise
+ */
 public class Plateau {
 	private ArrayList<CaseDeChemin> caseDeChemin;
 	private ArrayList<ArrayList<CaseDEchelle>> echelles;
@@ -207,7 +209,10 @@ public class Plateau {
 		}
 		System.out.println("");
 	}
-
+	
+	/**
+	 * Retire un cheval de l'écurie pour actualiser l'écurie quand on veut sortir un pion
+	 */
 	public void retirerEcurie(Joueur jCourant, Pion pion)
 	{
 		for(CaseEcurie c : caseEcurie) 

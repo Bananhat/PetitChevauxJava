@@ -5,7 +5,9 @@ import java.util.Scanner;
 import mainpackage.CasePleineException;
 import model.Joueur;
 import model.Pion;
-
+/**
+ * Cette classe est reservé a l'interface entre le joueur et le jeu
+ */
 public class Interface {
 	public Interface()
 	{
@@ -26,7 +28,12 @@ public class Interface {
 		}
 		else 
 		{
-			return cheval.deplacementFinalTest(de, plateau);
+			try {
+				return cheval.deplacementFinalTest(de, plateau);
+			} catch (CasePleineException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
 		}
 		return false;
 		
@@ -36,7 +43,7 @@ public class Interface {
 		int reponse;
 		String ouiounon = null;
 	
-		System.out.println("Voulez vous vous deplacer ?");
+		System.out.println("Voulez vous vous deplacer ? o/n : ");
 		
 		try
 		{
@@ -58,7 +65,7 @@ public class Interface {
 			
 			
 			reponse = Character.getNumericValue(reponseC);
-			
+			sc.nextLine();
 			}while(!appDeplacement(reponse, jCourant, plateau, de) && jCourant.aDautrePionSorti(jCourant.getChevaux().get(reponse-1)));
 		}
 		
@@ -77,7 +84,7 @@ public class Interface {
 				
 			reponse = Character.getNumericValue(reponseC);
 			
-			
+			sc.nextLine();
 			}while(!jCourant.sortirCheval(jCourant.getChevaux().get(reponse-1), plateau));
 			
 	}
