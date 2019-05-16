@@ -2,13 +2,8 @@ package vue;
 
 import java.util.ArrayList;
 
-import mainpackage.Case;
-import mainpackage.CaseDEchelle;
-import mainpackage.CaseDeChemin;
-import mainpackage.CaseEcurie;
-import mainpackage.Couleur;
-import mainpackage.Joueur;
-import mainpackage.Pion;
+import model.Joueur;
+import model.Pion;
 
 public class Plateau {
 	private ArrayList<CaseDeChemin> caseDeChemin;

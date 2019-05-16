@@ -1,6 +1,8 @@
-package mainpackage;
+package vue;
 
 import java.util.ArrayList;
+
+import model.Pion;
 
 public class CaseEcurie extends Case{
 	private String color = "null";

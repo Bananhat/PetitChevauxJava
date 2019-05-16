@@ -1,4 +1,4 @@
-package mainpackage;
+package control;
 /**
  * La classe <b> Partie </p> contient la boucle principale du jeu et les m�thodes d'initialisations 
  * @author Samuel	
@@ -6,6 +6,14 @@ package mainpackage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Joueur;
+import model.Pion;
+import vue.Case;
+import vue.CaseDEchelle;
+import vue.CaseDeChemin;
+import vue.CaseEcurie;
+import vue.Couleur;
+import vue.Interface;
 import vue.Plateau;
 
 public class Partie {
@@ -98,7 +106,7 @@ public class Partie {
             for(int i=0; i<4; i++)
             {
                 System.out.println("Joueur" + (i+1) + " - Entrez votre nom : ");
-                //nom = sc.nextLine();
+                nom = sc.nextLine();
                 listeJoueur.add(new Joueur(nom, Couleur.values()[i]));
                 listeJoueur.get(i).setCaseDeDepart(plateau.getChemin().get(i*14));
                 for(int j=0; j<4;j++) {

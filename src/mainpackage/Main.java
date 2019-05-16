@@ -2,6 +2,9 @@ package mainpackage;
 
 import java.util.Scanner;
 
+import control.Partie;
+import model.Joueur;
+
 public class Main {
 
 	public static void main(String[] args) 

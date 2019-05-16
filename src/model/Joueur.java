@@ -1,6 +1,9 @@
-package mainpackage;
+package model;
 import java.util.ArrayList;
 
+import vue.Case;
+import vue.CaseDeChemin;
+import vue.Couleur;
 import vue.Plateau;
 public class Joueur {
 	

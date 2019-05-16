@@ -1,8 +1,10 @@
-package mainpackage;
+package vue;
 
 import java.util.Scanner;
 
-import vue.Plateau;
+import mainpackage.CasePleineException;
+import model.Joueur;
+import model.Pion;
 
 public class Interface {
 	public Interface()

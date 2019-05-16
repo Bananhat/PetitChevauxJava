@@ -1,8 +1,14 @@
-package mainpackage;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import mainpackage.CasePleineException;
+import vue.Case;
+import vue.CaseDEchelle;
+import vue.CaseDeChemin;
+import vue.CaseEcurie;
+import vue.Couleur;
 import vue.Plateau;
 
 public class Pion 
@@ -16,6 +22,8 @@ public class Pion
 	private boolean FiniTour;
 	private Joueur j;
 	private boolean estSorti;
+	
+	
 	
 	public Pion(String id, Couleur c, Joueur j) 
 	{
@@ -69,7 +77,6 @@ public class Pion
 			
 		
 		if(posCaseNumerote == -1 && num==1) { //on commence l'entr�e � 0
-			System.out.println("Je suis dans la condition");
 			return this.deplacementFinal(num, p);
 		}
 		else {
@@ -138,7 +145,7 @@ public class Pion
 			}
 			if(this.FiniTour == true)
 			{
-						System.out.println("c'est la fin du tour");
+						System.out.println("C'est la fin du tour");
 						deplacement(p, i);
 			}
 
@@ -147,8 +154,6 @@ public class Pion
 				
 				if(doitManger) 
 				{
-					System.out.println("L'indice est de "+indice);
-					System.out.println("La pos est de : "+this.getPos());
 	
 					
 					if(!ejecterChevaux(p,(this.getPos()+1)%56))
@@ -156,7 +161,6 @@ public class Pion
 						this.pos = old_pos;
 					}
 				
-					System.out.println("passer");
 					this.augmentePos(1);
 					deplacement(p, num);
 				}

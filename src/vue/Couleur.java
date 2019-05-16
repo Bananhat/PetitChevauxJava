@@ -1,4 +1,4 @@
-package mainpackage;
+package vue;
 
 public enum Couleur {
 	JAUNE("Jaune",0), BLEU("Bleu",1), VERT("Vert",2), ROUGE("Rouge",3);
