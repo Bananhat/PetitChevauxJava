@@ -1,6 +1,6 @@
 package control;
 /**
- * La classe <b> Partie </p> contient la boucle principale du jeu et les methodes d'initialisations 
+ * La classe Partie contient la boucle principale du jeu et les methodes d'initialisations 
  * @author Samuel	
  */
 import java.util.ArrayList;
