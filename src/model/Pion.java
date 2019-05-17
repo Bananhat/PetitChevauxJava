@@ -81,7 +81,6 @@ public class Pion
 	 */
 	public boolean deplacementFinalTest(int num, Plateau p) throws CasePleineException // throws CasePleineException
 	{
-		System.out.println("Je suis dans deplacementFinal");
 		if(posCaseNumerote+1 == 6) //on v�rifie que le joueur ne d�passe pas 6
 		{
 			return false;
@@ -116,7 +115,6 @@ public class Pion
 		p.getChemin().get(this.getPos()).ajouteCheval(this);//on ajoute le cheval sur la nouvelle case
 		int oldPos = ( this.getPos() -num ) % 56;
 		if (oldPos<0) oldPos += 56;
-		System.out.println(oldPos);
 		p.getChemin().get(oldPos).retireCheval(this);//on retire le cheval de l'ancienne
 	}
 	
@@ -222,9 +220,7 @@ public class Pion
 		{
 			if(pion.couleur != this.couleur) 
 			{
-				System.out.println("la position a ejecter "+position);
 				listeAEjecter.add(pion);
-				System.out.println("Je suis la !!");
 				
 			}
 			else //Impossible de se deplcare
@@ -247,7 +243,6 @@ public class Pion
 
 	public void retourneEcurie(Plateau p, int pos) 
 	{
-		System.out.println("pos : "+pos);
 		p.getChemin().get(pos).getChevaux().remove(this);
 		for(Case e : p.getEcuries()) 
 		{
