@@ -59,7 +59,7 @@ public class Interface {
 			do {
 			char reponseC; 
 			do{
-				System.out.println("Quel cheval voulez vous deplacer ? :");
+				System.out.println("Quel cheval voulez vous deplacer ? (1,2,3,4) :");
 				reponseC = sc.next().charAt(0);	
 			} while(!Character.isDigit(reponseC) || Character.getNumericValue(reponseC) > 4 || Character.getNumericValue(reponseC)<=0 );
 			
@@ -78,7 +78,7 @@ public class Interface {
 		int reponse;
 			do {
 				do {
-					System.out.println("Quel cheval voulez vous sortir ? :");
+					System.out.println("Quel cheval voulez vous sortir ? (1,2,3,4) :");
 					reponseC = sc.next().charAt(0);	
 				} while(!Character.isDigit(reponseC) || Character.getNumericValue(reponseC) >= 5 || Character.getNumericValue(reponseC)<=0 );
 				
