@@ -40,6 +40,9 @@ public class Pion
 
 	/**
 	 * Déplace le pions sur l'echelle numeroté
+	 * @param num Le numero du dé
+	 * @param p Le plateau de jeu
+	 * @throws CasePleineException La case est pleine donc impossible d'y aller
 	 * @return si l'operation s'est bien déroule
 	 */
 	//deplacement final
@@ -71,6 +74,9 @@ public class Pion
 
 	/**
 	 * Controle la validié du déplacement sur les cases numérotés avant d'effectivement déplacer
+	 * @param num Le numero du dé
+	 * @param p Le plateau de jeu
+	 * @throws CasePleineException La case est pleine donc impossible d'y aller
 	 * @return si l'operation s'est bien déroule
 	 */
 	public boolean deplacementFinalTest(int num, Plateau p) throws CasePleineException // throws CasePleineException
@@ -102,6 +108,8 @@ public class Pion
 	
 	/**
 	 * Déplace le pions sur le chemin 
+	 * @param p Le plateau de jeu
+	 * @param num Le numero du dé
 	 */
 	public void deplacement(Plateau p, int num)
 	{
@@ -115,6 +123,10 @@ public class Pion
 
 	/**
 	 * Controle la validié du déplacement avant d'effectivement déplacer
+	 * @param num Le numero du dé
+	 * @param p Le plateau de jeu
+	 * @param jCourant Le joueur qui veut se déplacer
+         * @throws CasePleineException La case est pleine donc impossible d'y aller
 	 * @return si l'operation s'est bien déroule
 	 */
 	public boolean deplacerPionA(int num, Plateau p, Joueur jCourant) throws CasePleineException 
@@ -199,6 +211,8 @@ public class Pion
 	
 	/**
 	 * Vérifie la validité d'une ejection avant d'effectivement ejecter un ou des pions
+	 * @param p Le plateau de jeu
+	 * @param position La position à laquelle on veut ejecter les chevaux
 	 * @return si l'operation s'est bien déroulé
 	 */
 	public boolean ejecterChevaux(Plateau p, int position)
@@ -227,6 +241,8 @@ public class Pion
 	
 	/**
 	 * Deplace effectivement un pion dans l'écurie 
+	 * @param p Le plateau de jeu
+	 * @param pos La position a ejecter
 	 */
 
 	public void retourneEcurie(Plateau p, int pos) 
@@ -249,6 +265,7 @@ public class Pion
 	/**
 	 * Redefini la valeur de la variable Sorti pour redefinir cette variable quand un cheval est ejecter afin de 
 	 * faire reveinr le joueur à 0.
+	 * @param p Le plateau de jeu
 	 */
 
 	public void verifJoueurSorti(Plateau p)
