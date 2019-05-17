@@ -27,6 +27,8 @@ public class Joueur {
 	
 	/**
 	 * Sors un cheval sur le plateau et vérifie si il doit ejecter un cheval qui serait sur case de départ
+	 *@param pion Le pion a ejecter
+	 *@param plateau Le plateau de jeu
 	 * @return si l'opération s'est bien déroulé
 	 */
 	public boolean sortirCheval(Pion pion, Plateau plateau) 
@@ -50,6 +52,7 @@ public class Joueur {
 	
 	/**
 	 * Vérifie si le joueur peut encore sortir un pion ou si ils sont tous en piste
+	 *@param p Le plateau de jeu
 	 * @return le nombre de chevaux dans l'écurie
 	 */
 	public boolean resteASortir(Plateau p)
@@ -108,6 +111,7 @@ public class Joueur {
 
 	/**
 	 * Vérifie si il peut déplacer un autres pions si jamais l'exception de la case pleine apparait
+	 *@param pion Le pion qu'on ne doit pas considérer comme sorti
 	 * @return si d'autres pions sont déplacable en cas d'erreur
 	 */
 	public boolean aDautrePionSorti(Pion pion) {
