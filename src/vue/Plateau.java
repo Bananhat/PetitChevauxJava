@@ -212,6 +212,8 @@ public class Plateau {
 	
 	/**
 	 * Retire un cheval de l'écurie pour actualiser l'écurie quand on veut sortir un pion
+	 * @param jCourant Le joueur qui veut sortir de l'écurie
+	 * @param pion Le pion qui veut sortir de l'écurie
 	 */
 	public void retirerEcurie(Joueur jCourant, Pion pion)
 	{
