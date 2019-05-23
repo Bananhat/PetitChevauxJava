@@ -39,57 +39,54 @@ public class Partie {
 	
 	
 	
-	
-	//SAUVEGARDE POUR SOUTENANCE....
-	
-	 /* SAUVEGARDE.... 
+	public void sauv1()
+	{
 		//Test Sauv pour echelle arrêt;
-		Pion p = this.listeJoueur.get(0).getChevaux().get(0);
-		p.setPos(52);
-		plateau.retirerEcurie(this.listeJoueur.get(0), p);
-		plateau.getChemin().get(p.getPos()).getChevaux().add(p);
-		p.setSorti(true);
-		//
-		Pion p2 = this.listeJoueur.get(3).getChevaux().get(0);
-		p2.setPos(51);
-		plateau.retirerEcurie(this.listeJoueur.get(3), p2);
-		plateau.getChemin().get(p2.getPos()).getChevaux().add(p2);
-		p2.setSorti(true);
+				Pion p = this.listeJoueur.get(0).getChevaux().get(0);
+				p.setPos(52);
+				plateau.retirerEcurie(this.listeJoueur.get(0), p);
+				plateau.getChemin().get(p.getPos()).getChevaux().add(p);
+				//
+				Pion p2 = this.listeJoueur.get(3).getChevaux().get(0);
+				p2.setPos(51);
+				plateau.retirerEcurie(this.listeJoueur.get(3), p2);
+				plateau.getChemin().get(p2.getPos()).getChevaux().add(p2);
 		
-		Pion p4 = this.listeJoueur.get(0).getChevaux().get(1);
-		p4.setPos(52);
-		plateau.retirerEcurie(this.listeJoueur.get(0), p4);
-		plateau.getChemin().get(p4.getPos()).getChevaux().add(p4);
-		p4.setSorti(true);
-		
-		Pion p5 = this.listeJoueur.get(0).getChevaux().get(2);
-		p5.setPos(52);
-		plateau.retirerEcurie(this.listeJoueur.get(0), p5);
-		plateau.getChemin().get(p5.getPos()).getChevaux().add(p5);
-		p5.setSorti(true);
-		
-		Pion p6 = this.listeJoueur.get(0).getChevaux().get(3);
-		p6.setPos(52);
-		plateau.retirerEcurie(this.listeJoueur.get(0), p6);
-		plateau.getChemin().get(p6.getPos()).getChevaux().add(p6);
-		p6.setSorti(true);
-		//
-		
-		
-		//testEject
-		Pion p3 = this.listeJoueur.get(1).getChevaux().get(0);
-		p3.setPos(0);
-		plateau.retirerEcurie(this.listeJoueur.get(1), p3);
-		plateau.getChemin().get(p3.getPos()).getChevaux().add(p3);
-		p3.setSorti(true);
-		
-		//Test Sauv Passer Par dessus
-		
-		
-		
-		//Test SauvVictoire
-		*/
+				
+				Pion p4 = this.listeJoueur.get(0).getChevaux().get(1);
+				p4.setPos(52);
+				plateau.retirerEcurie(this.listeJoueur.get(0), p4);
+				plateau.getChemin().get(p4.getPos()).getChevaux().add(p4);
 	
+				
+				Pion p5 = this.listeJoueur.get(0).getChevaux().get(2);
+				p5.setPos(52);
+				plateau.retirerEcurie(this.listeJoueur.get(0), p5);
+				plateau.getChemin().get(p5.getPos()).getChevaux().add(p5);
+			
+				
+				Pion p6 = this.listeJoueur.get(0).getChevaux().get(3);
+				p6.setPos(52);
+				plateau.retirerEcurie(this.listeJoueur.get(0), p6);
+				plateau.getChemin().get(p6.getPos()).getChevaux().add(p6);
+
+				//
+				
+				
+				//testEject
+				Pion p3 = this.listeJoueur.get(1).getChevaux().get(0);
+				p3.setPos(0);
+				plateau.retirerEcurie(this.listeJoueur.get(1), p3);
+				plateau.getChemin().get(p3.getPos()).getChevaux().add(p3);
+				
+				
+				
+				
+				//Test SauvVictoire
+			
+	}
+
+		
 	public Scanner getScan() 
 	{
 		return sc;
@@ -211,6 +208,9 @@ public class Partie {
 		case 's':
 			this.de = 6;
 			break;
+		case 'l':
+			sauv1();
+			break;
 		}
 		
 	}
@@ -227,13 +227,13 @@ public class Partie {
 		char deTruc;
 		this.de = lancerDe();
 		
-		/*
+		
 		//SOUTENANCE
 		System.out.println("Valeur du dé  : ? ");
 		deTruc = sc.next().charAt(0);
 		deTrucF(deTruc);
 		sc.nextLine();
-		this.numJ = 0;*/
+		this.numJ = 0; //Test victoire !!!!
 		
 		
 		System.out.println("A Joueur "+Couleur.values()[numJ].getSymbole()+" de jouer");
