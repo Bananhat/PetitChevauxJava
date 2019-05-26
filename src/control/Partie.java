@@ -233,7 +233,7 @@ public class Partie {
 		deTruc = sc.next().charAt(0);
 		deTrucF(deTruc);
 		sc.nextLine();
-		this.numJ = 0; //Test victoire !!!!
+		//this.numJ = 0; //Test victoire !!!!
 		
 		
 		System.out.println("A Joueur "+Couleur.values()[numJ].getSymbole()+" de jouer");
